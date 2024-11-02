@@ -1,0 +1,62 @@
+.homecontainer {
+    height: 90vh;
+    border: 1px solid black;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.596), rgba(0, 0, 0, 0.722)), 
+                url(../Assets/pexels-fauxels-3184416.jpg);
+    background-position: bottom;
+    background-size: cover;
+    padding-top: 10vh;
+   
+  }
+  
+  /* Large screens (desktops) */
+  .homecontainer h1 {
+    font-size: 5rem;
+    margin: 0 100px;
+    color: white;
+  }
+  
+  /* Tablets (max-width: 1024px) */
+  @media (max-width: 1024px) {
+    .homecontainer {
+      padding-top: 8vh;
+      background-position: center;
+    }
+  
+    .homecontainer h1 {
+      font-size: 4rem;
+      margin: 0 80px;
+    }
+  }
+  
+  /* Small tablets and large phones (max-width: 768px) */
+  @media (max-width: 768px) {
+    .homecontainer {
+      padding-top: 6vh;
+      background-position: center;
+    }
+  
+    .homecontainer h1 {
+      font-size: 3rem;
+      margin: 0 60px;
+    }
+  }
+  
+  /* Small phones (max-width: 480px) */
+  @media (max-width: 480px) {
+    .homecontainer {
+      padding-top: 4vh;
+      background-position: center;
+      justify-content: center; /* Center content on small screens */
+      text-align: center;
+    }
+  
+    .homecontainer h1 {
+      font-size: 2.5rem;
+      margin: 0 20px;
+    }
+  }
+  

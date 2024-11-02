@@ -1,0 +1,49 @@
+/* home.css */
+
+/* General body and font settings */
+.home {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container for the page */
+  .home-container {
+    text-align: center;
+  }
+  
+  /* Header section */
+  h1 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  /* Buyer and Seller buttons */
+  .home-container div {
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    margin: 20px;
+    background-color: #6c63ff;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    font-weight: 600;
+  }
+  
+  /* Hover effect on buttons */
+  .home-container div:hover {
+    transform: translateY(-5px);
+    background-color: #5a54d7;
+  }
+  
