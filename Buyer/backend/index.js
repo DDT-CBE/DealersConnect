@@ -99,15 +99,6 @@ app.post("/signup", async (req, res) => {
       auth_id: newUser._id,
       type,
     });
-    const findUser = await UserInfoModel.findOne({ auth_id:id });
-
-    if (!findUser) {
-      return res.status(400).json({ message: "This ID not exist" });
-    }
-
-    findUser.dfs.push(newUser._id);
-    await findUser.save(); // Save the updated user information
-
     
     res.status(201).json(newAuthuser); // Respond with the created user
   } catch (error) {
