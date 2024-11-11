@@ -11,6 +11,7 @@ const verifyToken = require("./middelware");
 const generateToken = require("./utlis");
 const UserInfoModel = require("./Model/UserinfoModel");
 
+
 app.use(cors());
 app.use(express.json());
 
@@ -201,7 +202,7 @@ app.post("/login", async (req, res) => {
   const { email, password, type } = req.body;
 
   try {
-    const loggedUser = await SignupModel.findOne({ email }); // Find user by email
+    const loggedUser = await SignupModel.findOne({ email:email , type:type}); // Find user by email
 
     if (!loggedUser) {
       return res.status(404).json({ message: "User not found" }); // If no user found
@@ -209,6 +210,7 @@ app.post("/login", async (req, res) => {
 
     if (loggedUser.password === password && loggedUser.type === type) {
       const token = generateToken(loggedUser);
+     
 
       res.status(201).json({ token });
     } else {

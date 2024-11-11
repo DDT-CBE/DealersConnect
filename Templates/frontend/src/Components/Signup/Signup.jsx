@@ -30,7 +30,7 @@ const Signup = () => {
       email,
       password,
       type,
-      id
+      id,
     };
 
     axios
@@ -102,7 +102,7 @@ const Signup = () => {
                   <option disabled value="">
                     Select Role type
                   </option>
-                
+
                   <option value="Company 2">Company 2</option>
                   <option value="District Franchise">District Franchise</option>
                   <option value="Dealer">Dealer</option>
@@ -115,18 +115,42 @@ const Signup = () => {
           )}
           {type === "District Franchise" && (
             <div className="input-group">
-            <label>Company 2's ID</label>
-            <input
-              name="Company 2 id"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-              type="text" // Change to 'tel' for better validation
-              required={isSignup}
-            />
-          </div>
+              <label>Company 2's ID</label>
+              <input
+                name="Company 2 id"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                type="text" // Change to 'tel' for better validation
+                required={isSignup}
+              />
+            </div>
           )}
-           
 
+          {type === "Dealer" && (
+            <div className="input-group">
+              <label>District Franchise's ID</label>
+              <input
+                name="District Franchise's Id"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                type="text" // Change to 'tel' for better validation
+                required={isSignup}
+              />
+            </div>
+          )}
+
+          {type === "Sub Dealer" && (
+            <div className="input-group">
+              <label>Dealers 's ID</label>
+              <input
+                name="District Franchise's Id"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                type="text" // Change to 'tel' for better validation
+                required={isSignup}
+              />
+            </div>
+          )}
 
           <div className="input-group">
             <label htmlFor="phone">Phone</label>
