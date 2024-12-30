@@ -1,0 +1,117 @@
+.findcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.564)), url(../Assets/pexels-cytonn-955395.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 20px; /* Added padding for better spacing on smaller devices */
+  flex-direction: column; /* Ensures better stacking for small devices */
+}
+
+.title {
+  position: absolute;
+  top: 10%;
+  color: white;
+  font-size: 3rem;
+  text-align: center; /* Aligns the title centrally on small screens */
+}
+
+/* Default styles for large screens */
+.heading {
+  padding: 20px 0;
+  font-size: 3rem;
+  color: #03045e;
+}
+
+.findbox {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allows wrapping of buttons for small screens */
+}
+
+.findbtn {
+  background-color: #ff9500;
+  padding: 20px 40px;
+  border-radius: 20px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.findbtn:hover {
+  background-color: #ff7b00;
+  border: 1px solid white;
+  cursor: pointer;
+  transform: translateY(-2px); /* Added hover effect for interactivity */
+}
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .heading {
+    font-size: 2.5rem;
+    padding: 15px 0;
+  }
+
+  .findbox {
+    gap: 40px; /* Adjusted gap for better layout on tablets */
+  }
+
+  .findbtn {
+    padding: 18px 35px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Small tablets and large phones (max-width: 768px) */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+    padding: 10px 0;
+  }
+
+  .findbox {
+    flex-direction: column;
+    gap: 20px; /* Reduce gap and change layout to column */
+  }
+
+  .findbtn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    width: 80%; /* Button width is more manageable for mid-sized devices */
+  }
+}
+
+/* Small phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .findcontainer {
+    height: 90vh;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  .findbox {
+    flex-direction: column;
+    gap: 20px; /* Minimized gap for smaller screens */
+  }
+
+  .findbtn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    width: 100%; /* Full width for buttons */
+  }
+}
