@@ -3,6 +3,7 @@ import {
   approveSeller,
   getSeller,
   getsellerRequest,
+  getSingleSeller,
   removeSeller,
   sellerRegister,
   updateSeller,
@@ -13,6 +14,8 @@ const router = express.Router();
 router.get("/getsellerdata", getSeller);
 
 router.post("/sellerregister", sellerRegister);
+
+router.get("/seller/:id", getSingleSeller);
 
 //Admin Page
 

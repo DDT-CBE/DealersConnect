@@ -56,6 +56,17 @@ export const buyerRegister = async (req, res) => {
   }
 };
 
+export const getSingleBuyer = async (req,res) => {
+  const {id} = req.params
+  try {
+    const singleUser = await RegisterModel.findById(id); // Create a new user in the database
+    res.status(201).json(singleUser); // Respond with the created user
+  } catch (error) {
+    console.error("GetSingleBuyer error:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 //Admin page
 
 export const getbuyerRequest = async (req, res) => {

@@ -48,6 +48,17 @@ export const sellerRegister = async (req, res) => {
   }
 };
 
+export const getSingleSeller = async (req,res) =>{
+  const {id} = req.params
+  try {
+    const singleUser = await SellerModel.findById(id); // Create a new user in the database
+    res.status(201).json(singleUser); // Respond with the created user
+  } catch (error) {
+    console.error("GetSingleSeller error:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 //Admin Page
 
 export const getsellerRequest = async (req, res) => {

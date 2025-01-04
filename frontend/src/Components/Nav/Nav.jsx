@@ -5,6 +5,7 @@ import { Link as ScrollLink } from "react-scroll";
 import { Link as PathLink } from "react-router-dom";
 import { useEffect } from "react";
 
+
 const Nav = () => {
   const [menu, setMenu] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
@@ -26,9 +27,11 @@ const Nav = () => {
     }
   }, []); // Empty dependency array ensures it runs only once
 
+
   return (
     <Fragment>
       <nav className="navcontainer">
+      
         <img
           className="hamburger"
           src={hamburger}

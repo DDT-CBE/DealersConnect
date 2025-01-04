@@ -4,6 +4,7 @@ import {
   buyerRegister,
   getBuyer,
   getbuyerRequest,
+  getSingleBuyer,
   removeBuyer,
   updateBuyer,
 } from "../controller/buyer.controller.js";
@@ -13,6 +14,8 @@ const router = express.Router();
 router.get("/getbuyerdata", getBuyer);
 
 router.post("/buyerregister", buyerRegister);
+
+router.get("/buyer/:id", getSingleBuyer);
 
 //Admin Page
 
