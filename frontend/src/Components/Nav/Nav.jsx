@@ -4,11 +4,12 @@ import hamburger from "../Assets/icons8-hamburger-menu-100.png";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as PathLink } from "react-router-dom";
 import { useEffect } from "react";
-
+import {  Dropdown, Space } from 'antd';
 
 const Nav = () => {
   const [menu, setMenu] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+
   const menutoggle = () => {
     setMenu(!menu);
   };
@@ -28,10 +29,46 @@ const Nav = () => {
   }, []); // Empty dependency array ensures it runs only once
 
 
+
+  
+const items = [
+  {
+    key: '1',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="/">
+       Software Development
+      </a>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="/">
+        Digital Marketing
+      </a>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="/">
+        Registration
+      </a>
+    ),
+  },
+  {
+    key: '4',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="/">
+       Trademarks
+      </a>
+    ),
+  },
+];
+
   return (
     <Fragment>
       <nav className="navcontainer">
-      
         <img
           className="hamburger"
           src={hamburger}
@@ -100,6 +137,87 @@ const Nav = () => {
               Contact
             </ScrollLink>
           </li>
+
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              Association
+            </ScrollLink>
+          </li>
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              Job
+            </ScrollLink>
+          </li>
+
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              Freelancers
+            </ScrollLink>
+          </li>
+
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              StartUps
+            </ScrollLink>
+          </li>
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              Loans
+            </ScrollLink>
+          </li>
+
+          <Dropdown menu={{ items }} placement="bottomRight" arrow>
+            <Space>Services</Space>
+          </Dropdown>
+
+          <li>
+            <ScrollLink
+              to="contact-container"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={500}
+              activeClass="txtcolor"
+            >
+              Advertiesment
+            </ScrollLink>
+          </li>
+
           <li>
             {isLogged ? (
               <button
@@ -110,7 +228,6 @@ const Nav = () => {
                   color: "white",
                   cursor: "pointer",
                 }}
-
                 onClick={logoutHandler}
               >
                 Logout

@@ -15,7 +15,7 @@ const Nav2 = () => {
 
   // Use the location hook to get the current route
   const location = useLocation();
-
+  const navigate = useNavigate();
   const menutoggle = () => {
     setMenu(!menu);
   };
@@ -68,9 +68,7 @@ const Nav2 = () => {
     return <div>Loading...</div>; // Show loader while user data is being fetched
   }
 
-  const handleLinkClick = () => {
-    setMenu(false); // Close the menu when a link is clicked
-  };
+
 
 
 
@@ -93,7 +91,7 @@ const Nav2 = () => {
               <Link
                 to={"/"}
                 style={{ color: "#03045e", textDecoration: "none" }}
-                onClick={handleLinkClick}
+               
               >
                 Home
               </Link>
@@ -102,34 +100,34 @@ const Nav2 = () => {
               <Link
                 to="/dashboard"
                 style={{ color: "#03045e", textDecoration: "none" }}
-                onClick={handleLinkClick}
+               
               >
                 Dashboard
               </Link>
             </li>
 
             {/* Conditionally render the form link based on the page */}
-            {isLogged && (
+            
               <li>
                 {isBuyerPage || isBuyerFormPage ? (
                   <Link
-                    to={"/form/buyer"}
+                    to={isLogged? "/form/seller" : "/login"}
                     style={{ color: "#03045e", textDecoration: "none" }}
-                    onClick={handleLinkClick}
+                    
                   >
                     Register
                   </Link>
                 ) : isSellerPage || isSellerFormPage ? (
                   <Link
-                    to={"/form/seller"}
+                    to={ isLogged? "/form/seller" : "/login"}
                     style={{ color: "#03045e", textDecoration: "none" }}
-                    onClick={handleLinkClick}
+                   
                   >
                     Register
                   </Link>
                 ) : null}
               </li>
-            )}
+            
           </ul>
         )}
 
