@@ -104,7 +104,6 @@ const Signup = () => {
                   </option>
 
                   <option value="Company 2">Company 2</option>
-                  <option value="District Franchise">District Franchise</option>
                   <option value="Dealer">Dealer</option>
                   <option value="Sub Dealer">Sub Dealer</option>
                   <option value="Business Provider">Business Provider</option>
@@ -113,24 +112,12 @@ const Signup = () => {
               </div>
             </>
           )}
-          {type === "District Franchise" && (
-            <div className="input-group">
-              <label>Company 2's ID</label>
-              <input
-                name="Company 2 id"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                type="text" // Change to 'tel' for better validation
-                required={isSignup}
-              />
-            </div>
-          )}
 
           {type === "Dealer" && (
             <div className="input-group">
-              <label>District Franchise's ID</label>
+              <label>Company 2's ID</label>
               <input
-                name="District Franchise's Id"
+                name="Company 2's ID"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
                 type="text" // Change to 'tel' for better validation

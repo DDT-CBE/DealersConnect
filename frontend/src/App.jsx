@@ -15,9 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Franchisepage from "./Components/FranchisePage/Franchisepage";
 import Login from "./Components/Login/Login";
 import Signup from "./Components/Signup/Signup";
-import Dashboard from "./Components/Dashboard/Dashboard";
 import BuyerPageView from "./Components/Buyerpage/BuyerPageView";
 import SellerPageView from "./Components/Sellerpage/SellerPageView";
+import SuperDealer from "./Components/Hierarchy/SuperDealer";
+import Dealer from "./Components/Hierarchy/Dealer";
+import SubDealer from "./Components/Hierarchy/SubDealer";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -58,7 +60,9 @@ const App = () => {
         <Route path="/form/seller" element={<Sellerform />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/dashboard" element={<SuperDealer />}></Route>
+        <Route path="/dealers/:id" element={<Dealer />} />
+        <Route path="/subdealers/:id" element={<SubDealer />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

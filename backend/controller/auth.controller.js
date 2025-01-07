@@ -1,36 +1,91 @@
+import DealerModel from "../Model/DealerModel.js";
 import SignupModel from "../Model/signup.js";
-import UserInfoModel from "../Model/UserinfoModel.js";
+import SubDealerModel from "../Model/SubDealerModel.js";
+import SuperDealerModel from "../Model/SuperDealerModel.js";
 import generateToken from "../utlis/index.js";
 
 
 export const signupController = async (req, res) => {
   try {
-    const { name, email, type, id } = req.body;
+    const { name, email, type, id, phone } = req.body;
 
     // Check if a user with the same email and role already exists
     const checkuser = await SignupModel.findOne({ email, type });
 
-    // If email and role exist, return a message
     if (checkuser) {
-      return res
-        .status(400)
-        .json({ message: "This email and Role Type already exist" });
+      return res.status(400).json({ message: "This email and Role Type already exist" });
     }
 
-    // If email and role do not exist, create a new user
-    const newUser = await SignupModel.create(req.body); // Create a new user in the database
-    const newAuthuser = await UserInfoModel.create({
-      name,
-      auth_id: newUser._id,
-      type,
-    });
+    // Create a new user in the database
+    const newUser = await SignupModel.create(req.body);
 
-    res.status(201).json(newAuthuser); // Respond with the created user
+    // Handle SuperDealer signup
+    if (type === "Company 2") {
+      const superDealer = await SuperDealerModel.create({
+        name,
+        auth_id:newUser._id,
+        email,
+        type,
+        phone,
+        dealers: [], // Initialize empty dealers array
+      });
+      return res.status(201).json(superDealer);
+    }
+
+    // Handle Dealer signup
+    if (type === "Dealer") {
+      const dealer = await DealerModel.create({
+        name,
+        auth_id:newUser._id,
+        email,
+        type,
+        phone,
+        superDealer:id,
+        subDealers: [], // Initialize empty subDealers array
+      });
+
+      // Add dealer to the SuperDealer's `dealers` array
+      const superDealer = await SuperDealerModel.findById(id); // `id` is the SuperDealer's ID
+      if (!superDealer) {
+        return res.status(404).json({ message: "SuperDealer not found" });
+      }
+
+      superDealer.dealers.push(dealer._id);
+      await superDealer.save();
+
+      return res.status(201).json(dealer);
+    }
+
+    // Handle SubDealer signup
+    if (type === "Sub Dealer") {
+      const subDealer = await SubDealerModel.create({
+        name,
+        auth_id:newUser._id,
+        email,
+        type,
+        phone,
+        dealer:id
+      });
+
+      // Add subDealer to the Dealer's `subDealers` array
+      const dealer = await DealerModel.findById(id); // `id` is the Dealer's ID
+      if (!dealer) {
+        return res.status(404).json({ message: "Dealer not found" });
+      }
+
+      dealer.subDealers.push(subDealer._id);
+      await dealer.save();
+
+      return res.status(201).json(subDealer);
+    }
+
+    return res.status(201).json(newUser);
   } catch (error) {
     console.error("Signup error:", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 
 

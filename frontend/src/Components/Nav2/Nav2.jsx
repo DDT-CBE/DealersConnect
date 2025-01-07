@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import hamburger from "../Assets/icons8-hamburger-menu-100.png";
 import axios from "axios";
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, message, Space } from "antd";
 
 const DB_URL = process.env.REACT_APP_API_URL;
 
@@ -15,7 +13,7 @@ const Nav2 = () => {
 
   // Use the location hook to get the current route
   const location = useLocation();
-  const navigate = useNavigate();
+ 
   const menutoggle = () => {
     setMenu(!menu);
   };
@@ -48,6 +46,7 @@ const Nav2 = () => {
           setAuthUser(res.data);
           setLoading(false); // Data fetched, stop loading
           console.log("User data:", res.data);
+  
         })
         .catch((err) => {
           console.log("Error fetching user data: " + err.message);
@@ -68,10 +67,6 @@ const Nav2 = () => {
     return <div>Loading...</div>; // Show loader while user data is being fetched
   }
 
-
-
-
-
   return (
     <Fragment>
       <nav className="navcontainer">
@@ -91,7 +86,6 @@ const Nav2 = () => {
               <Link
                 to={"/"}
                 style={{ color: "#03045e", textDecoration: "none" }}
-               
               >
                 Home
               </Link>
@@ -100,39 +94,32 @@ const Nav2 = () => {
               <Link
                 to="/dashboard"
                 style={{ color: "#03045e", textDecoration: "none" }}
-               
               >
                 Dashboard
               </Link>
             </li>
 
             {/* Conditionally render the form link based on the page */}
-            
-              <li>
-                {isBuyerPage || isBuyerFormPage ? (
-                  <Link
-                    to={isLogged? "/form/seller" : "/login"}
-                    style={{ color: "#03045e", textDecoration: "none" }}
-                    
-                  >
-                    Register
-                  </Link>
-                ) : isSellerPage || isSellerFormPage ? (
-                  <Link
-                    to={ isLogged? "/form/seller" : "/login"}
-                    style={{ color: "#03045e", textDecoration: "none" }}
-                   
-                  >
-                    Register
-                  </Link>
-                ) : null}
-              </li>
-            
+
+            <li>
+              {isBuyerPage || isBuyerFormPage ? (
+                <Link
+                  to={isLogged ? "/form/seller" : "/login"}
+                  style={{ color: "#03045e", textDecoration: "none" }}
+                >
+                  Register
+                </Link>
+              ) : isSellerPage || isSellerFormPage ? (
+                <Link
+                  to={isLogged ? "/form/seller" : "/login"}
+                  style={{ color: "#03045e", textDecoration: "none" }}
+                >
+                  Register
+                </Link>
+              ) : null}
+            </li>
           </ul>
         )}
-
-       
-        
       </nav>
     </Fragment>
   );

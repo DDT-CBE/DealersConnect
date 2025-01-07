@@ -8,6 +8,7 @@ import { ConnectDb } from "./lib/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import buyerRoutes from "./routes/buyer.routes.js";
 import sellerRoutes from "./routes/seller.routes.js";
+import hierarchyRoutes from "./routes/Hierarchy.Routes.js"
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ const __dirname = path.resolve();
 app.use("/auth", authRoutes);
 app.use("/api", buyerRoutes);
 app.use("/api", sellerRoutes);
+app.use("/api", hierarchyRoutes);
 
 
 

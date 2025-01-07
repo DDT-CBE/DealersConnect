@@ -78,7 +78,6 @@ const Login = () => {
             >
               <option disabled value="">Select Role type</option>
               <option value="Company 2">Company 2</option>
-              <option value="District Franchise">District Franchise</option>
               <option value="Dealer">Dealer</option>
               <option value="Sub Dealer">Sub Dealer</option>
               <option value="Business Provider">Business Provider</option>
