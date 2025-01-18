@@ -53,81 +53,120 @@ const Buyerpage = () => {
       <Nav2 />
 
       <h1 className="buyer-title">Business Seeker</h1>
-      <Search />
+              <Search />
 
-      {err ? (
-        <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
+            {err ? (
+        <div style={{ textAlign: 'center', color: 'red', marginTop: '20px' }}>
           <h2>{err}</h2>
         </div>
-      ) : (
+      ):(
         <div className="buyer-container">
-          {buyerdata.map((data) => (
-            <div className="buyer-card" key={data._id}>
-              <table className="details-tables">
-                <tbody>
-                  <tr>
-                    <th>Title</th>
-                    <td>{data.title}</td>
-                  </tr>
 
-                  <tr>
-                    <th>Industry</th>
-                    <td>{data.industry}</td>
-                  </tr>
+                {buyerdata.map((data) => (
+                    <div className="buyer-card" key={data._id}>
+                        
+                            <table className="details-tables">
+                                <tbody>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>{data.title}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Industry</th>
+                                    <td>{data.industry}</td>
+                                </tr>
 
-                  <tr>
-                    <th>Category</th>
-                    <td>{data.category}</td>
-                  </tr>
-                  <tr>
-                    <th>Role Looking for</th>
-                    <td>
-                      {(() => {
-                        const roles = [];
+                                <tr>
+                                    <th>Category</th>
+                                    <td>{data.category}</td>
+                                </tr>
+                                <tr>
+                                <th>Role Looking for</th>
+                                      <td>
+                                        {(() => {
+                                          const roles = [];
 
-                        if (data.role.dealer) roles.push("Dealer");
-                        if (data.role.franchise) roles.push("Franchise");
-                        if (data.role.wholesaler) roles.push("Wholesaler");
-                        if (data.role.stockist) roles.push("Stockist");
-                        if (data.role.distributor) roles.push("Distributor");
-                        if (data.role.agency) roles.push("Agency");
-                        if (data.role.retailer) roles.push("Retailer");
-                        if (data.role.BusinessBuyOuts)
-                          roles.push("  Business Buy Outs");
-                        if (data.role.InvestPartners)
-                          roles.push("InvestPartners");
-                        if (data.role.SharePartners)
-                          roles.push("SharePartners");
-                        if (data.role.WorkingPartners)
-                          roles.push("WorkingPartners");
-                        if (data.role.ShareBuyers) roles.push("Share Buyers");
-                        if (data.role.SeedFunders) roles.push("Seed Funders ");
-                        if (data.role.VentureCapitals)
-                          roles.push("Venture Capitals");
+                                          if (data.role.dealer) roles.push("Dealer");
+                                          if (data.role.franchise) roles.push("Franchise");
+                                          if (data.role.wholesaler) roles.push("Wholesaler");
+                                          if (data.role.stockist) roles.push("Stockist");
+                                          if (data.role.distributor) roles.push("Distributor");
+                                          if (data.role.agency) roles.push("Agency");
+                                          if (data.role.retailer) roles.push("Retailer");
+                                          if (data.role.BusinessBuyOuts) roles.push("  Business Buy Outs");
+                                          if (data.role.InvestPartners) roles.push("InvestPartners");
+                                          if (data.role.SharePartners) roles.push("SharePartners");
+                                          if (data.role.WorkingPartners) roles.push("WorkingPartners");
+                                          if (data.role.ShareBuyers) roles.push("Share Buyers");
+                                          if (data.role.SeedFunders ) roles.push("Seed Funders ");
+                                          if (data.role.VentureCapitals) roles.push("Venture Capitals");
+                                        
 
-                        return roles.length > 0
-                          ? roles.join(", ")
-                          : "No Roles Selected";
-                      })()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Investment</th>
-                    <td>{data.investmentrange.min}</td>
-                  </tr>
-                </tbody>
-              </table>
+                                          return roles.length > 0 ? roles.join(", ") : "No Roles Selected";
+                                        })()}
+                                      </td>
 
-              <button
-                className={activeBuyerId === data._id ? "morehide" : "more"}
-                onClick={() => navigate(`/buyer/${data._id}`)}
-              >
-                More
-              </button>
+                                </tr>
+                                <tr>
+                                    <th>Investment</th>
+                                    <td>{data.investmentrange.min}</td>
+                                </tr>
+                               
+                                </tbody>
+                            </table>
+                       
+
+
+                        <button className={activeBuyerId === data._id ?"morehide":'more'} onClick={() => toggleBtnMore(data._id)}>
+                             More
+                        </button>
+
+                        {/* Conditionally show more details if this buyer's ID matches the activeBuyerId */}
+                        {activeBuyerId === data._id && (
+                            <table className="details-table">
+                              <tbody>
+                                <tr>
+                                  <th>Description:</th>
+                                  <td>{data.description}</td>
+                                </tr>
+                                <tr>
+                                  <th>Investment Minimum:</th>
+                                  <td>{data.investmentrange.min}</td>
+                                </tr>
+                                <tr>
+                                  <th>Investment Maximum:</th>
+                                  <td>{data.investmentrange.max}</td>
+                                </tr>
+                                <tr>
+                                  <th>Space Have:</th>
+                                  <td>{data.space}</td>
+                                </tr>
+                                <tr>
+                                  <th>State:</th>
+                                  <td>{data.state}</td>
+                                </tr>
+                                <tr>
+                                  <th>District:</th>
+                                  <td>{data.district}</td>
+                                </tr>
+                                <tr>
+                                  <th>Revenue:</th>
+                                  <td>{data.revenue}</td>
+                                </tr>
+                                <tr>
+                                  <th>Start Duration:</th>
+                                  <td>{data.duration}</td>
+                                </tr>
+                                
+                              </tbody>
+                            </table>
+                        )}
+                    </div>
+                ))}
             </div>
-          ))}
-        </div>
       )}
+
     </Fragment>
   );
 };
