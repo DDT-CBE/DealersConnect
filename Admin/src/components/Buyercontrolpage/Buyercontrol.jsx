@@ -1,172 +1,137 @@
-import axios from 'axios';
-import React, { Fragment ,useEffect,useState} from 'react'
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
 import "./buyercontrol.css";
+import { Loader } from "lucide-react";
+import UserCard from "../UserCard";
 const APIURL = process.env.REACT_APP_API_URL;
 
 const Buyercontrol = () => {
+  const [userdata, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeBuyerId, setActiveBuyerId] = useState(null); // State to track which buyer's "More" section is open
+  const [openModal, setOpenModal] = useState(null);
 
-    const [userdata, setUserData] = useState([]);
-    const [loading, setLoading] = useState(true); 
-    
 
-      // Fetch user data
+
+  // Fetch user data
   const handleFetch = () => {
-    axios.get(`${APIURL}api/getbuyerrequest`)
-      .then(res => {
+    axios
+      .get(`${APIURL}api/getbuyerrequest`)
+      .then((res) => {
         console.log(res.data);
         setUserData(res.data);
         setLoading(false); // Set loading false once data is fetched
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         setLoading(false);
       });
   };
 
-  
+  // Handle approval of user data
+  const approveHandler = (id, currentApproveStatus) => {
+    // Toggle the approve status
+    const newApproveStatus = !currentApproveStatus;
 
+    // Update the user approval status in the backend
+    axios
+      .put(`${APIURL}api/approvebuyer/${id}`, { approve: newApproveStatus })
+      .then((res) => {
+        console.log(res.data);
 
-    // Handle approval of user data
-    const approveHandler = (id, currentApproveStatus) => {
-        // Toggle the approve status
-        const newApproveStatus = !currentApproveStatus;
-    
-        // Update the user approval status in the backend
-        axios.put(`${APIURL}api/approvebuyer/${id}`, { approve: newApproveStatus })
-          .then(res => {
-            console.log(res.data);
-    
-            // Update the state to reflect the change
-            const updatedUsers = userdata.map(user => 
-              user._id === id ? { ...user, approve: newApproveStatus } : user
-            );
-            setUserData(updatedUsers);
-          })
-          .catch(err => console.log(err));
-      };
+        // Update the state to reflect the change
+        const updatedUsers = userdata.map((user) =>
+          user._id === id ? { ...user, approve: newApproveStatus } : user
+        );
+        setUserData(updatedUsers);
+      })
+      .catch((err) => console.log(err));
+  };
 
+  const toggleBtnMore = (buyerId) => {
+    // Toggle the activeBuyerId; if the same ID is clicked again, close it
+    setActiveBuyerId(activeBuyerId === buyerId ? null : buyerId);
+  };
 
+  useEffect(() => {
+    handleFetch();
+  }, []);
 
+  if (loading) {
+    return (
+      <div className=" flex justify-center items-center h-screen w-screen">
+        <Loader className="w-14 h-14 animate-spin" color="#000000" />
+      </div>
+    ); // Show loading indicator while data is being fetched
+  }
 
-      useEffect(() => {
-        handleFetch();
-      }, []);
-
-
-      if (loading) {
-        return <div>Loading...</div>; // Show loading indicator while data is being fetched
-      }
-
-      // Filter to show only users with approve: false
-  const filteredUsers = userdata.filter(user => user.approve === false);
+  // Filter to show only users with approve: false
+  const filteredUsers = userdata.filter((user) => user.approve === false);
   return (
     <Fragment>
-         <center><h1>Admin Panel - Pending Approvals</h1></center> 
-{filteredUsers.length === 0 ? (
-  <center>
-  <p>No approvals pending.</p>
-</center>
-) :(
-  <div className="home-container">
-        {filteredUsers.map((data, index) => (
-          <div className="user-card" key={index}>
-            <label>Id</label>
-            <input type="text" value={data._id} readOnly />
-            <label>Name:</label>
-            <input type="text" value={data.name} readOnly />
-            <label>Phone:</label>
-            <input type="text" value={data.phone} readOnly />
-            <label>Title</label>
-            <input type="text" value={data.title} readOnly />
+      {filteredUsers.length === 0 ? (
 
-            <label>Description</label>
-            <input type="text" value={data.description} readOnly />
+        <section class="bg-white dark:bg-gray-900 ">
+          <div class="container flex items-center min-h-screen px-6 py-12 mx-auto">
+            <div class="flex flex-col items-center max-w-sm mx-auto text-center">
+              <p class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                  />
+                </svg>
+              </p>
+              <h1 class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">
+                Page not found
+              </h1>
+              <p class="mt-4 text-gray-500 dark:text-gray-400">
+                All approvals have been granted. No approvals pending.
+              </p>
 
-            <label>Industry</label>
-            <input type="text" value={data.industry} readOnly />
+              <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
+                <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-black transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800  hover:bg-gray-100 dark:text-gray-200 ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5 rtl:rotate-180"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+                    />
+                  </svg>
 
-            <label>Category</label>
-            <input type="text" value={data.category} readOnly />
+                  <span className="text-black">
+                    {" "}
+                    <a href="/"> Go back </a>
+                  </span>
+                </button>
 
-           
-            <label>State</label>
-            <input type="text" value={data.state} readOnly />
-            <label>District</label>
-            <input type="text" value={data.district} readOnly />
-           
-
-            <label>Role:</label>
-              <label>Dealer</label>
-              <input type="checkbox" checked={data.role.dealer} readOnly />
-
-              <label>Franchise</label>
-              <input type="checkbox" checked={data.role.franchise} readOnly />
-
-              <label>Wholesaler</label>
-              <input type="checkbox" checked={data.role.wholesaler} readOnly />
-
-              <label>Stockist</label>
-              <input type="checkbox" checked={data.role.stockist} readOnly />
-
-              <label>Distributor</label>
-              <input type="checkbox" checked={data.role.distributor} readOnly />
-
-              <label>Agency</label>
-              <input type="checkbox" checked={data.role.agency} readOnly />
-
-              <label>Retailer</label>
-              <input type="checkbox" checked={data.role.retailer} readOnly />
-              <label>Business Buy Outs</label>
-              <input type="checkbox" checked={data.role.BusinessBuyOuts} readOnly />
-              <label>Invest Partners</label>
-              <input type="checkbox" checked={data.role.InvestPartners} readOnly />
-              <label>Share Partners</label>
-              <input type="checkbox" checked={data.role.SharePartners} readOnly />
-              <label>Working Partners</label>
-              <input type="checkbox" checked={data.role.WorkingPartners} readOnly />
-              <label>Share Buyers</label>
-              <input type="checkbox" checked={data.role.ShareBuyers} readOnly />
-              <label>Seed Funders </label>
-              <input type="checkbox" checked={data.role.SeedFunders } readOnly />
-              <label>Venture Capitals </label>
-              <input type="checkbox" checked={data.role.VentureCapitals } readOnly />
-
-              
-
-
-
-
-
-
-
-
-            <label>Space</label>
-            <input type="text" value={data.space} readOnly />
-
-            <label>Revenue</label>
-            <input type="text" value={data.revenue} readOnly />
-            <label>Duration</label>
-            <input type="text" value={data.duration} readOnly />
-
-            <label>Investment Range</label>
-            Min Value{' '}
-            <input type="text" value={data.investmentrange ? data.investmentrange.min : ""} readOnly />
-            - Max Value{' '}
-            <input type="text" value={data.investmentrange ? data.investmentrange.max : ""} readOnly />
-
-            <button 
-              className="approve-button" 
-              onClick={() => approveHandler(data._id, data.approve)}
-            >
-              Approve
-            </button>
+                <button class="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                  <a href="/"> Take me home</a>
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-)}
-         
+        </section>
+      ) : (
+        <UserCard data={filteredUsers} approveHandler={approveHandler} />
+      )}
     </Fragment>
-  )
-}
+  );
+};
 
-export default Buyercontrol
+export default Buyercontrol;

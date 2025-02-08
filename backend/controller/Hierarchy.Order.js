@@ -23,7 +23,6 @@ export const getDealer = async (req, res) => {
     );
     if (!dealer) return res.status(404).json({ message: "Dealer not found" });
     res.json(dealer);
-    console.log("Dealer:", dealer);
   } catch (err) {
     console.log(err);
 
@@ -46,5 +45,3 @@ export const getSubDealer = async (req, res) => {
       .json({ message: "Error fetching sub-dealer", error: err.message });
   }
 };
-
-

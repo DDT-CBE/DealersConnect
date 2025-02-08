@@ -5,6 +5,7 @@ import Buyercontrol from './components/Buyercontrolpage/Buyercontrol'
 import Sellercontrol from './components/Sellercontrolpage/Sellercontrol'
 import Editsellerdata from './components/Edit/Editsellerdata'
 import Editbuyerdata from './components/Edit/Editbuyerdata'
+import "flowbite";
 
 
 

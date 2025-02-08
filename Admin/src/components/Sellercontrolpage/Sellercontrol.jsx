@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
+import { Loader } from "lucide-react";
+import SellerCard from '../SellerCard';
 const APIURL = process.env.REACT_APP_API_URL;
 
 const Sellercontrol = () => {
@@ -48,121 +50,91 @@ const Sellercontrol = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading indicator while data is being fetched
+    return (
+      <div className=" flex justify-center items-center h-screen w-screen">
+        <Loader
+          className="w-14 h-14 animate-spin"
+          color="#000000"
+        />
+        
+      </div>
+    ); // Show loading indicator while data is being fetched
   }
+
 
   // Filter to show only users with approve: false
   const filteredUsers = userdata.filter((user) => user.approve === false);
 
   return (
     <Fragment>
-      <center>
-        <h1>Admin Panel - Pending Approvals</h1>
-      </center>
+      
 
-      {filteredUsers.length === 0 ? (
-        <center>
-          <p>No approvals pending.</p>
-        </center>
-      ) : (
-        <div className="home-container">
-          {filteredUsers.map((data, index) => (
-            <div className="user-card" key={index}>
-              <label>Id</label>
-              <input type="text" value={data._id} readOnly />
-              <label>Name:</label>
-              <input type="text" value={data.name} readOnly />
-              <label>Email:</label>
-              <input type="text" value={data.email} readOnly />
-              <label>Phone:</label>
-              <input type="text" value={data.phone} readOnly />
-              <label>Title</label>
-              <input type="text" value={data.title} readOnly />
-
-              <label>Description</label>
-              <input type="text" value={data.description} readOnly />
-              <label>Company Name</label>
-              <input type="text" value={data.companyname} readOnly />
-              <label>Address</label>
-              <input type="text" value={data.address} readOnly />
-              <label>Brand Name</label>
-              <input type="text" value={data.brandname} readOnly />
-
-              <label>Industry</label>
-              <input type="text" value={data.industry} readOnly />
-
-              <label>Category</label>
-              <input type="text" value={data.category} readOnly />
-              <label>Product/Service</label>
-              <input type="text" value={data.product} readOnly />
-              <label>Revenue</label>
-              <input type="text" value={data.revenue} readOnly />
-
-              <label>Royality</label>
-              <input type="text" value={data.royality} readOnly />
-
-              <label>Role:</label>
-              <label>Dealer</label>
-              <input type="checkbox" checked={data.role.dealer} readOnly />
-
-              <label>Franchise</label>
-              <input type="checkbox" checked={data.role.franchise} readOnly />
-
-              <label>Wholesaler</label>
-              <input type="checkbox" checked={data.role.wholesaler} readOnly />
-
-              <label>Stockist</label>
-              <input type="checkbox" checked={data.role.stockist} readOnly />
-
-              <label>Distributor</label>
-              <input type="checkbox" checked={data.role.distributor} readOnly />
-
-              <label>Agency</label>
-              <input type="checkbox" checked={data.role.agency} readOnly />
-
-              <label>Retailer</label>
-              <input type="checkbox" checked={data.role.retailer} readOnly />
-
-              <label>Business Sell Outs</label>
-              <input type="checkbox" checked={data.role.BusinessSellOuts} readOnly />
-
-              <label>Invest Partners</label>
-              <input type="checkbox" checked={data.role.InvestPartners} readOnly />
-
-              <label>Share Partners</label>
-              <input type="checkbox" checked={data.role.SharePartners} readOnly />
-
-              <label>Working Partners</label>
-              <input type="checkbox" checked={data.role.WorkingPartners} readOnly />
-
-              <label>Share Sellers</label>
-              <input type="checkbox" checked={data.role.ShareSellers} readOnly />
-
-              <label>Seed Funders </label>
-              <input type="checkbox" checked={data.role.SeedFunders } readOnly />
-
-              <label>Venture Capitals</label>
-              <input type="checkbox" checked={data.role.VentureCapitals} readOnly />
-
-              <label>Investment Range</label>
-              Min Value{' '}
-              <input type="text" value={data.investmentminimum} readOnly /> - Max Value{' '}
-              <input type="text" value={data.investmentmaximum} readOnly />
-              <label>Space</label>
-              <input type="text" value={data.space} readOnly />
-              <label>State</label>
-              <input type="text" value={data.state} readOnly />
-              <label>District</label>
-              <input type="text" value={data.district} readOnly />
-              <label>Number Hide</label>
-              <input type="text" value={data.numberhide} readOnly />
-              <button className="approve-button" onClick={() => approveHandler(data._id, data.approve)}>
-                Approve
-              </button>
+    
+         {filteredUsers.length === 0 ? (
+          // <center>
+          //   <p>No approvals pending.</p>
+          // </center>
+  
+          <section class="bg-white dark:bg-gray-900 ">
+            <div class="container flex items-center min-h-screen px-6 py-12 mx-auto">
+              <div class="flex flex-col items-center max-w-sm mx-auto text-center">
+                <p class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                </p>
+                <h1 class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">
+                  Page not found
+                </h1>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">
+                All approvals have been granted. No approvals pending.
+                </p>
+  
+                <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
+                  <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-black transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800  hover:bg-gray-100 dark:text-gray-200 ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-5 h-5 rtl:rotate-180"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+                      />
+                    </svg>
+  
+                    <span className="text-black">
+                      {" "}
+                      <a href="/"> Go back </a>
+                    </span>
+                  </button>
+  
+                  <button class="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                    <a href="/"> Take me home</a>
+                  </button>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-      )}
+          </section>
+         
+      ) : (
+          <SellerCard sellers={filteredUsers} approveHandler={approveHandler} />
+        )}
     </Fragment>
   );
 };

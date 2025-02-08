@@ -32,14 +32,13 @@ const Editseller = ({ data }) => {
 
     return (
         <Fragment>
-            <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target={`#id${data._id}`}
-            >
-                Edit
-            </button>
+       <button
+        data-bs-toggle="modal"
+        data-bs-target={`#id${data._id}`}
+        className="px-4 py-2 border rounded text-sm font-medium text-black transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300 hover:bg-gray-100"
+      >
+        Edit
+      </button>
 
             <div className="modal fade" id={`id${data._id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
