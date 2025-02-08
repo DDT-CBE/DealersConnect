@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Loader } from "lucide-react";
 import SellerCard from '../SellerCard';
+import { Nav } from '../Nav';
 const APIURL = process.env.REACT_APP_API_URL;
 
 const Sellercontrol = () => {
@@ -69,7 +70,7 @@ const Sellercontrol = () => {
     <Fragment>
       
 
-    
+    <Nav />
          {filteredUsers.length === 0 ? (
           // <center>
           //   <p>No approvals pending.</p>

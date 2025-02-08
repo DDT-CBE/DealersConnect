@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./buyercontrol.css";
 import { Loader } from "lucide-react";
 import UserCard from "../UserCard";
+import { Nav } from "../Nav";
 const APIURL = process.env.REACT_APP_API_URL;
 
 const Buyercontrol = () => {
@@ -69,6 +70,9 @@ const Buyercontrol = () => {
   const filteredUsers = userdata.filter((user) => user.approve === false);
   return (
     <Fragment>
+
+<Nav />
+
       {filteredUsers.length === 0 ? (
 
         <section class="bg-white dark:bg-gray-900 ">
