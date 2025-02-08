@@ -3,6 +3,7 @@ import axios from "axios";
 import Nav2 from "../Nav2/Nav2";
 import Search from "../Search/Search";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import SellerCard from "../SellerCard";
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -52,146 +53,140 @@ const Sellerpage = () => {
 
       <Nav2 />
 
-            
+      <h1 className="buyer-title">Business Provider</h1>
 
-<h1 className="buyer-title">Business Provider</h1>
+      <Search />
 
-    <Search />
+      {err ? (
+        <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
+          <h2>{err}</h2>
+        </div>
+      ) : (
+        <SellerCard sellers={sellerdata} />
+        //         <div className="buyer-container">
+        // {sellerdata.map((data, index) => (
+        //     <div className="buyer-card" key={index}>
+        //         <table className="details-tables">
+        //         <tbody>
+        //             <tr>
+        //                 <th>Title</th>
+        //                 <td>{data.title}</td>
+        //             </tr>
 
-{err ? (
-    <div style={{ textAlign: 'center', color: 'red', marginTop: '20px' }}>
-    <h2>{err}</h2>
-    </div>
-):(
-<div className="buyer-container">
-{sellerdata.map((data, index) => (
-    <div className="buyer-card" key={index}>
-        <table className="details-tables">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{data.title}</td>
-            </tr>
-           
-            <tr>
-                <th>Industry</th>
-                <td>{data.industry}</td>
-            </tr>
+        //             <tr>
+        //                 <th>Industry</th>
+        //                 <td>{data.industry}</td>
+        //             </tr>
 
-            <tr>
-                <th>Category</th>
-                <td>{data.category}</td>
-            </tr>
-           
-            <tr>
-            <th>Role Looking for</th>
-                  <td>
-                    {(() => {
-                      const roles = [];
+        //             <tr>
+        //                 <th>Category</th>
+        //                 <td>{data.category}</td>
+        //             </tr>
 
-                      if (data.role.dealer) roles.push("Dealer");
-                      if (data.role.franchise) roles.push("Franchise");
-                      if (data.role.wholesaler) roles.push("Wholesaler");
-                      if (data.role.stockist) roles.push("Stockist");
-                      if (data.role.distributor) roles.push("Distributor");
-                      if (data.role.agency) roles.push("Agency");
-                      if (data.role.retailer) roles.push("Retailer");
-                      if (data.role.BusinessSellOuts) roles.push(" Business Sell Outs");
-                      if (data.role.InvestPartners) roles.push("Invest Partners");
-                      if (data.role.SharePartners) roles.push("Share Partners");
-                      if (data.role.WorkingPartners) roles.push("Working Partners");
-                      if (data.role.ShareSellers) roles.push("Share Sellers");
-                      if (data.role.SeedFunders ) roles.push("Seed Funders");
-                      if (data.role.VentureCapitals) roles.push("Venture Capitals");
+        //             <tr>
+        //             <th>Role Looking for</th>
+        //                   <td>
+        //                     {(() => {
+        //                       const roles = [];
 
-                      return roles.length > 0 ? roles.join(", ") : "No Roles Selected";
-                    })()}
-                  </td>
-            </tr>
+        //                       if (data.role.dealer) roles.push("Dealer");
+        //                       if (data.role.franchise) roles.push("Franchise");
+        //                       if (data.role.wholesaler) roles.push("Wholesaler");
+        //                       if (data.role.stockist) roles.push("Stockist");
+        //                       if (data.role.distributor) roles.push("Distributor");
+        //                       if (data.role.agency) roles.push("Agency");
+        //                       if (data.role.retailer) roles.push("Retailer");
+        //                       if (data.role.BusinessSellOuts) roles.push(" Business Sell Outs");
+        //                       if (data.role.InvestPartners) roles.push("Invest Partners");
+        //                       if (data.role.SharePartners) roles.push("Share Partners");
+        //                       if (data.role.WorkingPartners) roles.push("Working Partners");
+        //                       if (data.role.ShareSellers) roles.push("Share Sellers");
+        //                       if (data.role.SeedFunders ) roles.push("Seed Funders");
+        //                       if (data.role.VentureCapitals) roles.push("Venture Capitals");
 
-                    <tr>
-                        <th>Investment</th>
-                        <td>{data.investmentminimum}</td>
-                    </tr>
-                    
+        //                       return roles.length > 0 ? roles.join(", ") : "No Roles Selected";
+        //                     })()}
+        //                   </td>
+        //             </tr>
 
-            
-        </tbody>
-    </table>
+        //                     <tr>
+        //                         <th>Investment</th>
+        //                         <td>{data.investmentminimum}</td>
+        //                     </tr>
 
-    <button className={activeSellerId === data._id ? "morehide" : 'more'} onClick={() => toggleBtnMore(data._id)}>
-         More
-    </button>
+        //         </tbody>
+        //     </table>
 
-    {/* Conditionally show more details if this seller's ID matches the activeSellerId */}
-    {activeSellerId === data._id && (
-       
-            <table className="details-table">
-                <tbody>
-                    <tr>
-                        <th>Description</th>
-                        <td>{data.description}</td>
-                    </tr>
+        //     <button className={activeSellerId === data._id ? "morehide" : 'more'} onClick={() => toggleBtnMore(data._id)}>
+        //          More
+        //     </button>
 
-                    <tr>
-                        <th>Investment Minimum</th>
-                        <td>{data.investmentminimum}</td>
-                    </tr>
+        //     {/* Conditionally show more details if this seller's ID matches the activeSellerId */}
+        //     {activeSellerId === data._id && (
 
-                    <tr>
-                        <th>Investment Maximum</th>
-                        <td>{data.investmentmaximum}</td>
-                    </tr>
-                    <tr>
-                        <th>Company Name</th>
-                        <td>{data.companyname}</td>
-                    </tr>
-                   
-                    <tr>
-                        <th>Brand Name</th>
-                        <td>{data.brandname}</td>
-                    </tr>
-                   
-                    <tr>
-                        <th>Product/Service</th>
-                        <td>{data.product}</td>
-                    </tr>
-                    <tr>
-                        <th>Revenue</th>
-                        <td>{data.revenue}</td>
-                    </tr>
-                    <tr>
-                        <th>Space Required</th>
-                        <td>{data.space}</td>
-                    </tr>
-                    <tr>
-                        <th>State</th>
-                        <td>{data.state}</td>
-                    </tr>
-                    <tr>
-                        <th>District</th>
-                        <td>{data.district}</td>
-                    </tr>
-                    <tr>
-                        <th>Royality</th>
-                        <td>{data.royality}</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td>{data.address}</td>
-                    </tr>
-                   
-                   
-                  
-                </tbody>
-            </table>
-       
-    )}
-</div>
-))}
-</div>
-)}
+        //             <table className="details-table">
+        //                 <tbody>
+        //                     <tr>
+        //                         <th>Description</th>
+        //                         <td>{data.description}</td>
+        //                     </tr>
 
+        //                     <tr>
+        //                         <th>Investment Minimum</th>
+        //                         <td>{data.investmentminimum}</td>
+        //                     </tr>
+
+        //                     <tr>
+        //                         <th>Investment Maximum</th>
+        //                         <td>{data.investmentmaximum}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Company Name</th>
+        //                         <td>{data.companyname}</td>
+        //                     </tr>
+
+        //                     <tr>
+        //                         <th>Brand Name</th>
+        //                         <td>{data.brandname}</td>
+        //                     </tr>
+
+        //                     <tr>
+        //                         <th>Product/Service</th>
+        //                         <td>{data.product}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Revenue</th>
+        //                         <td>{data.revenue}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Space Required</th>
+        //                         <td>{data.space}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>State</th>
+        //                         <td>{data.state}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>District</th>
+        //                         <td>{data.district}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Royality</th>
+        //                         <td>{data.royality}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Address</th>
+        //                         <td>{data.address}</td>
+        //                     </tr>
+
+        //                 </tbody>
+        //             </table>
+
+        //     )}
+        // </div>
+        // ))}
+        // </div>
+      )}
     </Fragment>
   );
 };

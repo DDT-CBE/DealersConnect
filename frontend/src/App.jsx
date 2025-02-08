@@ -20,6 +20,7 @@ import SellerPageView from "./Components/Sellerpage/SellerPageView";
 import SuperDealer from "./Components/Hierarchy/SuperDealer";
 import Dealer from "./Components/Hierarchy/Dealer";
 import SubDealer from "./Components/Hierarchy/SubDealer";
+import Pricing from "./Components/Pricing";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -63,6 +64,7 @@ const App = () => {
         <Route path="/dashboard" element={<SuperDealer />}></Route>
         <Route path="/dealers/:id" element={<Dealer />} />
         <Route path="/subdealers/:id" element={<SubDealer />} />
+        <Route path="/pricing" element={<Pricing />}></Route>
       </Routes>
       <ToastContainer />
     </BrowserRouter>
