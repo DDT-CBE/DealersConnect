@@ -13,6 +13,7 @@ const SellerSchema = new mongoose.Schema({
     category:String,
     product:String,
     revenue:String,
+    seekerType:String,
     role: {  // Update role to accept an object with "dealer" and "franchise"
         dealer: { type: Boolean, default: false },
         franchise: { type: Boolean, default: false },

@@ -10,6 +10,7 @@ const RegisterSchema = new mongoose.Schema({
     space :String,
     state :String,
     district:String,
+    businessType:String,
     investmentrange: {
         min: Number,
         max: Number

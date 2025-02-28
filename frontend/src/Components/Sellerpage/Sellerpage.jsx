@@ -2,8 +2,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import Nav2 from "../Nav2/Nav2";
 import Search from "../Search/Search";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate , Link } from "react-router-dom";
 import SellerCard from "../SellerCard";
+
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -13,6 +14,38 @@ const Sellerpage = () => {
   const [loading, setLoading] = useState(true);
   const [searchparams] = useSearchParams();
   const [err, setErr] = useState(null); // To store error messages
+    const [isLogged, setIsLogged] = useState(false);
+  
+      // Fetch user data
+  const getUserData = () => {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      setIsLogged(false);
+      setLoading(false); // Stop loading when no token is found
+    } else {
+      setIsLogged(true);
+
+      axios
+        .get(`${url}auth/data`, {
+          headers: {
+            Authorization: `${token}`, // Add the token to the Authorization header
+          },
+        })
+        .then((res) => {
+          setLoading(false); // Data fetched, stop loading
+          console.log("User data:", res.data);
+        })
+        .catch((err) => {
+          console.log("Error fetching user data: " + err.message);
+          setLoading(false); // Stop loading even on error
+          if (err.response && err.response.status === 401) {
+            // If token is invalid or expired, handle accordingly
+            localStorage.removeItem("token"); // Clear invalid token
+          }
+        });
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -37,6 +70,7 @@ const Sellerpage = () => {
 
   useEffect(() => {
     getsellerdata();
+    getUserData();
   }, [searchparams]);
 
   const toggleBtnMore = (id) => {
@@ -51,141 +85,33 @@ const Sellerpage = () => {
     <Fragment>
       <Nav2 />
 
-      <Nav2 />
+     <div className="relative w-full p-4">
+             <button
+               className="absolute top-20 right-4 sm:right-6 md:right-10 lg:right-14 
+                   bg-yellow-400 text-blue-900 font-semibold py-2 px-4 
+                    rounded-lg shadow-md 
+                   hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
+             >
+               <Link
+                 to={isLogged ? "/form/seller" : "/login"}
+                 style={{ color: "#03045e", textDecoration: "none" }}
+               >
+                 Register
+               </Link>
+             </button>
+           </div>
 
-      <h1 className="buyer-title">Business Provider</h1>
+
+    
 
       <Search />
-
+      <h1 className="buyer-title">Business Provider</h1>
       {err ? (
         <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
           <h2>{err}</h2>
         </div>
       ) : (
         <SellerCard sellers={sellerdata} />
-        //         <div className="buyer-container">
-        // {sellerdata.map((data, index) => (
-        //     <div className="buyer-card" key={index}>
-        //         <table className="details-tables">
-        //         <tbody>
-        //             <tr>
-        //                 <th>Title</th>
-        //                 <td>{data.title}</td>
-        //             </tr>
-
-        //             <tr>
-        //                 <th>Industry</th>
-        //                 <td>{data.industry}</td>
-        //             </tr>
-
-        //             <tr>
-        //                 <th>Category</th>
-        //                 <td>{data.category}</td>
-        //             </tr>
-
-        //             <tr>
-        //             <th>Role Looking for</th>
-        //                   <td>
-        //                     {(() => {
-        //                       const roles = [];
-
-        //                       if (data.role.dealer) roles.push("Dealer");
-        //                       if (data.role.franchise) roles.push("Franchise");
-        //                       if (data.role.wholesaler) roles.push("Wholesaler");
-        //                       if (data.role.stockist) roles.push("Stockist");
-        //                       if (data.role.distributor) roles.push("Distributor");
-        //                       if (data.role.agency) roles.push("Agency");
-        //                       if (data.role.retailer) roles.push("Retailer");
-        //                       if (data.role.BusinessSellOuts) roles.push(" Business Sell Outs");
-        //                       if (data.role.InvestPartners) roles.push("Invest Partners");
-        //                       if (data.role.SharePartners) roles.push("Share Partners");
-        //                       if (data.role.WorkingPartners) roles.push("Working Partners");
-        //                       if (data.role.ShareSellers) roles.push("Share Sellers");
-        //                       if (data.role.SeedFunders ) roles.push("Seed Funders");
-        //                       if (data.role.VentureCapitals) roles.push("Venture Capitals");
-
-        //                       return roles.length > 0 ? roles.join(", ") : "No Roles Selected";
-        //                     })()}
-        //                   </td>
-        //             </tr>
-
-        //                     <tr>
-        //                         <th>Investment</th>
-        //                         <td>{data.investmentminimum}</td>
-        //                     </tr>
-
-        //         </tbody>
-        //     </table>
-
-        //     <button className={activeSellerId === data._id ? "morehide" : 'more'} onClick={() => toggleBtnMore(data._id)}>
-        //          More
-        //     </button>
-
-        //     {/* Conditionally show more details if this seller's ID matches the activeSellerId */}
-        //     {activeSellerId === data._id && (
-
-        //             <table className="details-table">
-        //                 <tbody>
-        //                     <tr>
-        //                         <th>Description</th>
-        //                         <td>{data.description}</td>
-        //                     </tr>
-
-        //                     <tr>
-        //                         <th>Investment Minimum</th>
-        //                         <td>{data.investmentminimum}</td>
-        //                     </tr>
-
-        //                     <tr>
-        //                         <th>Investment Maximum</th>
-        //                         <td>{data.investmentmaximum}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>Company Name</th>
-        //                         <td>{data.companyname}</td>
-        //                     </tr>
-
-        //                     <tr>
-        //                         <th>Brand Name</th>
-        //                         <td>{data.brandname}</td>
-        //                     </tr>
-
-        //                     <tr>
-        //                         <th>Product/Service</th>
-        //                         <td>{data.product}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>Revenue</th>
-        //                         <td>{data.revenue}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>Space Required</th>
-        //                         <td>{data.space}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>State</th>
-        //                         <td>{data.state}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>District</th>
-        //                         <td>{data.district}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>Royality</th>
-        //                         <td>{data.royality}</td>
-        //                     </tr>
-        //                     <tr>
-        //                         <th>Address</th>
-        //                         <td>{data.address}</td>
-        //                     </tr>
-
-        //                 </tbody>
-        //             </table>
-
-        //     )}
-        // </div>
-        // ))}
-        // </div>
       )}
     </Fragment>
   );

@@ -104,7 +104,7 @@ const Nav2 = () => {
             <li>
               {isBuyerPage || isBuyerFormPage ? (
                 <Link
-                  to={isLogged ? "/form/seller" : "/login"}
+                  to={isLogged ? "/form/buyer" : "/login"}
                   style={{ color: "#03045e", textDecoration: "none" }}
                 >
                   Register

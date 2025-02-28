@@ -19,6 +19,7 @@ const Form = () => {
   const [district, setDistrict] = useState("");
   const [investmentMin, setInvestmentMin] = useState("");
   const [investmentMax, setInvestmentMax] = useState("");
+  const [businessType ,setBusinessType] = useState("");
   const [role, setRole] = useState({
     dealer: false,
     franchise: false,
@@ -69,6 +70,7 @@ const Form = () => {
       revenue,
       duration,
       numberhide,
+      businessType,
       approve,
     };
 
@@ -122,15 +124,99 @@ const Form = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
 
+<label >Business Provider Type</label>
+<select 
+  value={businessType} 
+  onChange={(e) => setBusinessType(e.target.value)}
+>
+  <option value="">Select Business Type</option>
+  <option value="Franchisor">Franchisor</option>
+  <option value="Manufacturer">Manufacturer</option>
+  <option value="Stockist">Stockist</option>
+  <option value="Wholesaler">Wholesaler</option>
+  <option value="Distributor">Distributor</option>
+  <option value="Business Sell Outs">Business Sell Outs</option>
+</select>
+
+
           <label>Industry</label>
           <select
             name="industry"
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
           >
-            <option>Select Industry</option>
-            <option value="Education">Education</option>
-            <option value="Electronics">Electronics</option>
+
+{ ["Manufacturer", "Stockist", "Wholesaler", "Distributor"].includes(businessType) ? (
+     <>
+     
+  <option value="">Select Industry</option>
+  <option value="Agriculture">Agriculture</option>
+  <option value="Automobile">Automobile</option>
+  <option value="Building and Construction">Building and Construction</option>
+  <option value="Business Services">Business Services</option>
+  <option value="Chemicals">Chemicals</option>
+  <option value="Computer Hardware, Mobile & Accessories">Computer Hardware, Mobile & Accessories</option>
+  <option value="Education">Education</option>
+  <option value="Electronics & Electrical Supplies">Electronics & Electrical Supplies</option>
+  <option value="Environment & Pollution">Environment & Pollution</option>
+  <option value="Fashion & Apparel">Fashion & Apparel</option>
+  <option value="Food & Beverages">Food & Beverages</option>
+  <option value="Furniture">Furniture</option>
+  <option value="Health & Beauty">Health & Beauty</option>
+  <option value="Home Supplies">Home Supplies</option>
+  <option value="Hotel supplies & Equipments">Hotel supplies & Equipments</option>
+  <option value="Industry Supplies">Industry Supplies</option>
+  <option value="Jewellery, Gemstones & Astrology">Jewellery, Gemstones & Astrology</option>
+  <option value="Medical & Hospital">Medical & Hospital</option>
+  <option value="Office & School">Office & School</option>
+  <option value="Packaging, Paper & Plastic Products">Packaging, Paper & Plastic Products</option>
+  <option value="Pharmaceuticals">Pharmaceuticals</option>
+  <option value="Printing & Publishing">Printing & Publishing</option>
+  <option value="Retail & E-Retail">Retail & E-Retail</option>
+  <option value="Scientific & Laboratory">Scientific & Laboratory</option>
+  <option value="Security & Protection">Security & Protection</option>
+  <option value="Sports, Fitness & Entertainment">Sports, Fitness & Entertainment</option>
+  <option value="Telecommunication">Telecommunication</option>
+  <option value="Textile, Fabrics & Accessories">Textile, Fabrics & Accessories</option>
+  <option value="Toys & Games">Toys & Games</option>
+
+
+     </>
+) :  ["Franchisor"].includes(businessType) ? (
+
+  <>
+  
+ 
+  <option value="">Select Industry</option>
+  <option value="Automotive">Automotive</option>
+  <option value="BeautyWellness">Beauty & Wellness</option>
+  <option value="BusinessServices">Business Services</option>
+  <option value="ChildrenProducts">Children’s Products & Services</option>
+  <option value="EducationTraining">Education & Training</option>
+  <option value="FoodBeverage">Food & Beverage</option>
+  <option value="HealthFitness">Health & Fitness</option>
+  <option value="HomeMaintenance">Home Maintenance & Repair</option>
+  <option value="PetCare">Pet Care</option>
+  <option value="RealEstate">Real Estate</option>
+  <option value="Retail">Retail</option>
+  <option value="SportsFitness">Sports & Fitness</option>
+  <option value="Technology">Technology</option>
+  <option value="TravelHospitality">Travel & Hospitality</option>
+
+
+  </>
+) :
+
+(
+     <>
+       <option>Select Industry</option>
+       <option value="Education">Education</option>
+       <option value="Electronics">Electronics</option>
+     </>
+)}
+
+
+          
           </select>
 
           <label>Category</label>
@@ -140,19 +226,899 @@ const Form = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option>Select Category</option>
-            {industry === "Education" && (
-              <>
-                <option value="School">School</option>
-                <option value="College">College</option>
-              </>
-            )}
+            {industry === "Automotive" && (
+  <>
+    <option value="Car Dealerships">Car Dealerships</option>
+    <option value="Car Rentals">Car Rentals</option>
+    <option value="Car Wash and Detailing">Car Wash and Detailing</option>
+    <option value="Oil and Lube Services">Oil and Lube Services</option>
+    <option value="Repair and Maintenance">Repair and Maintenance</option>
+  </>
+)}
 
-            {industry === "Electronics" && (
-              <>
-                <option value="Mobiles">Mobiles</option>
-                <option value="Laptops">Laptops</option>
-              </>
-            )}
+{industry === "BeautyWellness" && (
+  <>
+    <option value="Beauty Salons">Beauty Salons</option>
+    <option value="Fitness Centers">Fitness Centers</option>
+    <option value="Gyms">Gyms</option>
+    <option value="Hair Restoration">Hair Restoration</option>
+    <option value="Laser Hair Removal">Laser Hair Removal</option>
+    <option value="Massage Therapy">Massage Therapy</option>
+    <option value="Nail Salons">Nail Salons</option>
+    <option value="Skin Care Clinics">Skin Care Clinics</option>
+    <option value="Spas">Spas</option>
+    <option value="Tattoo Removal">Tattoo Removal</option>
+    <option value="Weight Loss Centers">Weight Loss Centers</option>
+  </>
+)}
+
+{industry === "BusinessServices" && (
+  <>
+    <option value="Accounting and Tax Preparation">Accounting and Tax Preparation</option>
+    <option value="Advertising and Marketing">Advertising and Marketing</option>
+    <option value="Business Brokers">Business Brokers</option>
+    <option value="Business Consulting">Business Consulting</option>
+    <option value="Commercial Cleaning">Commercial Cleaning</option>
+    <option value="Courier and Delivery Services">Courier and Delivery Services</option>
+    <option value="Digital Marketing">Digital Marketing</option>
+    <option value="Document Shredding">Document Shredding</option>
+    <option value="Employee Staffing">Employee Staffing</option>
+    <option value="Event Planning">Event Planning</option>
+    <option value="Executive Search">Executive Search</option>
+    <option value="Financial Services">Financial Services</option>
+    <option value="Human Resources">Human Resources</option>
+    <option value="Insurance Services">Insurance Services</option>
+    <option value="IT Services">IT Services</option>
+    <option value="Janitorial Services">Janitorial Services</option>
+    <option value="Mail and Package Delivery">Mail and Package Delivery</option>
+    <option value="Management Consulting">Management Consulting</option>
+    <option value="Marketing Research">Marketing Research</option>
+    <option value="Office Administrative Services">Office Administrative Services</option>
+  </>
+)}
+
+{industry === "ChildrenProducts" && (
+  <>
+    <option value="After-School Programs">After-School Programs</option>
+    <option value="Baby Products">Baby Products</option>
+    <option value="Children's Apparel">Children's Apparel</option>
+    <option value="Children's Education">Children's Education</option>
+    <option value="Children's Entertainment">Children's Entertainment</option>
+    <option value="Children's Furniture">Children's Furniture</option>
+    <option value="Day Care Centers">Day Care Centers</option>
+    <option value="Kids' Gyms">Kids' Gyms</option>
+    <option value="Preschools">Preschools</option>
+    <option value="Tutoring Services">Tutoring Services</option>
+  </>
+)}
+
+{industry === "EducationTraining" && (
+  <>
+    <option value="Adult Education">Adult Education</option>
+    <option value="Business Training">Business Training</option>
+    <option value="Computer Training">Computer Training</option>
+    <option value="Cooking Schools">Cooking Schools</option>
+    <option value="Dance Studios">Dance Studios</option>
+    <option value="Driving Schools">Driving Schools</option>
+    <option value="English Language Schools">English Language Schools</option>
+    <option value="Flight Schools">Flight Schools</option>
+    <option value="Language Schools">Language Schools</option>
+    <option value="Martial Arts Schools">Martial Arts Schools</option>
+    <option value="Music Schools">Music Schools</option>
+    <option value="Online Education">Online Education</option>
+    <option value="Professional Training">Professional Training</option>
+    <option value="Tutoring Services">Tutoring Services</option>
+    <option value="Vocational Training">Vocational Training</option>
+  </>
+)}
+
+{industry === "FoodBeverage" && (
+  <>
+    <option value="Bakeries">Bakeries</option>
+    <option value="Bars and Nightclubs">Bars and Nightclubs</option>
+    <option value="Cafes">Cafes</option>
+    <option value="Catering Services">Catering Services</option>
+    <option value="Coffee Shops">Coffee Shops</option>
+    <option value="Convenience Stores">Convenience Stores</option>
+    <option value="Fast Food Restaurants">Fast Food Restaurants</option>
+    <option value="Food Delivery Services">Food Delivery Services</option>
+    <option value="Food Trucks">Food Trucks</option>
+    <option value="Ice Cream Shops">Ice Cream Shops</option>
+    <option value="Juice Bars">Juice Bars</option>
+    <option value="Pizza Restaurants">Pizza Restaurants</option>
+    <option value="Restaurants">Restaurants</option>
+    <option value="Sandwich Shops">Sandwich Shops</option>
+    <option value="Smoothie Bars">Smoothie Bars</option>
+    <option value="Specialty Food Stores">Specialty Food Stores</option>
+    <option value="Tea Rooms">Tea Rooms</option>
+  </>
+)}
+
+{industry === "HealthFitness" && (
+  <>
+    <option value="Chiropractic Clinics">Chiropractic Clinics</option>
+    <option value="Dental Clinics">Dental Clinics</option>
+    <option value="Fitness Centers">Fitness Centers</option>
+    <option value="Gyms">Gyms</option>
+    <option value="Health Food Stores">Health Food Stores</option>
+    <option value="Home Health Care">Home Health Care</option>
+    <option value="Medical Clinics">Medical Clinics</option>
+    <option value="Medical Spas">Medical Spas</option>
+    <option value="Occupational Therapy">Occupational Therapy</option>
+    <option value="Orthotics and Prosthetics">Orthotics and Prosthetics</option>
+    <option value="Personal Training">Personal Training</option>
+    <option value="Pharmacies">Pharmacies</option>
+    <option value="Physical Therapy">Physical Therapy</option>
+    <option value="Senior Care">Senior Care</option>
+    <option value="Speech Therapy">Speech Therapy</option>
+    <option value="Wellness Centers">Wellness Centers</option>
+    <option value="Yoga Studios">Yoga Studios</option>
+  </>
+)}
+
+{industry === "HomeMaintenance" && (
+  <>
+    <option value="Air Conditioning Repair">Air Conditioning Repair</option>
+    <option value="Appliance Repair">Appliance Repair</option>
+    <option value="Carpet Cleaning">Carpet Cleaning</option>
+    <option value="Construction Services">Construction Services</option>
+    <option value="Electrical Services">Electrical Services</option>
+    <option value="Flooring Services">Flooring Services</option>
+    <option value="Handyman Services">Handyman Services</option>
+    <option value="Heating Repair">Heating Repair</option>
+    <option value="Home Inspection Services">Home Inspection Services</option>
+    <option value="Home Security Systems">Home Security Systems</option>
+    <option value="HVAC Services">HVAC Services</option>
+    <option value="Landscaping Services">Landscaping Services</option>
+    <option value="Lawn Care Services">Lawn Care Services</option>
+    <option value="Locksmith Services">Locksmith Services</option>
+    <option value="Mold Remediation">Mold Remediation</option>
+    <option value="Painting Services">Painting Services</option>
+    <option value="Pest Control Services">Pest Control Services</option>
+    <option value="Plumbing Services">Plumbing Services</option>
+    <option value="Pool Cleaning Services">Pool Cleaning Services</option>
+    <option value="Roofing Services">Roofing Services</option>
+  </>
+)}
+
+{industry === "PetCare" && (
+  <>
+    <option value="Animal Grooming">Animal Grooming</option>
+    <option value="Animal Training">Animal Training</option>
+    <option value="Boarding Kennels">Boarding Kennels</option>
+    <option value="Dog Day Care">Dog Day Care</option>
+    <option value="Dog Walking Services">Dog Walking Services</option>
+    <option value="Pet Food Stores">Pet Food Stores</option>
+    <option value="Pet Grooming Salons">Pet Grooming Salons</option>
+    <option value="Pet Sitting Services">Pet Sitting Services</option>
+    <option value="Pet Stores">Pet Stores</option>
+    <option value="Veterinary Clinics">Veterinary Clinics</option>
+  </>
+)}
+
+{industry === "RealEstate" && (
+  <>
+    <option value="Apartment Rentals">Apartment Rentals</option>
+    <option value="Commercial Real Estate">Commercial Real Estate</option>
+    <option value="Home Inspections">Home Inspections</option>
+    <option value="Home Staging">Home Staging</option>
+    <option value="Property Management">Property Management</option>
+    <option value="Real Estate Agencies">Real Estate Agencies</option>
+    <option value="Real Estate Investment">Real Estate Investment</option>
+    <option value="Residential Real Estate">Residential Real Estate</option>
+    <option value="Vacation Rentals">Vacation Rentals</option>
+  </>
+)}
+
+{industry === "Retail" && (
+  <>
+    <option value="Art Galleries">Art Galleries</option>
+    <option value="Baby Stores">Baby Stores</option>
+    <option value="Bookstores">Bookstores</option>
+    <option value="Clothing Stores">Clothing Stores</option>
+    <option value="Convenience Stores">Convenience Stores</option>
+    <option value="Department Stores">Department Stores</option>
+    <option value="Discount Stores">Discount Stores</option>
+    <option value="Dollar Stores">Dollar Stores</option>
+    <option value="Electronics Stores">Electronics Stores</option>
+    <option value="Furniture Stores">Furniture Stores</option>
+    <option value="Gift Shops">Gift Shops</option>
+    <option value="Grocery Stores">Grocery Stores</option>
+    <option value="Hardware Stores">Hardware Stores</option>
+    <option value="Home Decor Stores">Home Decor Stores</option>
+    <option value="Jewelry Stores">Jewelry Stores</option>
+  </>
+)}
+
+{industry === "SportsFitness" && (
+  <>
+    <option value="Athletic Wear">Athletic Wear</option>
+    <option value="Bike Shops">Bike Shops</option>
+    <option value="Fitness Centers">Fitness Centers</option>
+    <option value="Golf Courses">Golf Courses</option>
+    <option value="Gyms">Gyms</option>
+    <option value="Martial Arts Schools">Martial Arts Schools</option>
+    <option value="Outdoor Gear Stores">Outdoor Gear Stores</option>
+    <option value="Running Shoes">Running Shoes</option>
+    <option value="Skate Shops">Skate Shops</option>
+    <option value="Sporting Goods Stores">Sporting Goods Stores</option>
+    <option value="Sports Bars">Sports Bars</option>
+    <option value="Surf Shops">Surf Shops</option>
+    <option value="Tennis Courts">Tennis Courts</option>
+    <option value="Yoga Studios">Yoga Studios</option>
+  </>
+)}
+
+{industry === "Technology" && (
+  <>
+    <option value="Computer Hardware">Computer Hardware</option>
+    <option value="Computer Networking">Computer Networking</option>
+    <option value="Cyber Security">Cyber Security</option>
+    <option value="Data Analytics">Data Analytics</option>
+    <option value="Digital Marketing">Digital Marketing</option>
+    <option value="E-commerce Solutions">E-commerce Solutions</option>
+    <option value="IT Consulting">IT Consulting</option>
+    <option value="Mobile App Development">Mobile App Development</option>
+    <option value="Software Development">Software Development</option>
+    <option value="Web Design">Web Design</option>
+    <option value="Web Development">Web Development</option>
+  </>
+)}
+
+{industry === "TravelHospitality" && (
+  <>
+    <option value="Airlines">Airlines</option>
+    <option value="Bed and Breakfasts">Bed and Breakfasts</option>
+    <option value="Car Rental Services">Car Rental Services</option>
+    <option value="Cruise Lines">Cruise Lines</option>
+    <option value="Hotels">Hotels</option>
+    <option value="Motels">Motels</option>
+    <option value="Online Travel Agencies">Online Travel Agencies</option>
+    <option value="Resorts">Resorts</option>
+    <option value="Tour Operators">Tour Operators</option>
+    <option value="Travel Agencies">Travel Agencies</option>
+    <option value="Vacation Rentals">Vacation Rentals</option>
+  </>
+)}
+
+{/* for other dealer and distributors */}
+
+  {industry === "Agriculture" && (
+    <>
+      <option value="Agrochemicals">Agrochemicals</option>
+      <option value="Agricultural Equipment">Agricultural Equipment</option>
+      <option value="Fertilizers">Fertilizers</option>
+      <option value="Irrigation Systems">Irrigation Systems</option>
+      <option value="Pesticides">Pesticides</option>
+      <option value="Seeds">Seeds</option>
+      <option value="Tractors and Farm Machinery">Tractors and Farm Machinery</option>
+    </>
+  )}
+  {industry === "Automobile" && (
+    <>
+      <option value="Accessories">Accessories</option>
+      <option value="Batteries">Batteries</option>
+      <option value="Car Dealers">Car Dealers</option>
+      <option value="Commercial Vehicles">Commercial Vehicles</option>
+      <option value="Lubricants">Lubricants</option>
+      <option value="Motorcycles">Motorcycles</option>
+      <option value="Spare Parts">Spare Parts</option>
+      <option value="Tyres">Tyres</option>
+    </>
+  )}
+
+  {industry === "Building and Construction" && (
+    <>
+      <option value="Building Materials">Building Materials</option>
+      <option value="Cement">Cement</option>
+      <option value="Construction Equipment">Construction Equipment</option>
+      <option value="Electrical Fittings">Electrical Fittings</option>
+      <option value="Flooring">Flooring</option>
+      <option value="Glass and Glazing">Glass and Glazing</option>
+      <option value="Paints and Coatings">Paints and Coatings</option>
+      <option value="Plumbing">Plumbing</option>
+      <option value="Steel and Metal Products">Steel and Metal Products</option>
+    </>
+  )}
+  {industry === "Chemicals" && (
+    <>
+      <option value="Adhesives">Adhesives</option>
+      <option value="Industrial Chemicals">Industrial Chemicals</option>
+      <option value="Paints and Coatings">Paints and Coatings</option>
+      <option value="Petrochemicals">Petrochemicals</option>
+      <option value="Specialty Chemicals">Specialty Chemicals</option>
+    </>
+  )}
+  {industry === "Education" && (
+    <>
+      <option value="Colleges">Colleges</option>
+      <option value="Ed-Tech">Ed-Tech</option>
+      <option value="Online Courses">Online Courses</option>
+      <option value="Schools">Schools</option>
+      <option value="Universities">Universities</option>
+      <option value="Vocational Training">Vocational Training</option>
+    </>
+  )}
+  {industry === "Energy and Power" && (
+    <>
+      <option value="Electric Power">Electric Power</option>
+      <option value="Oil and Gas">Oil and Gas</option>
+      <option value="Renewable Energy">Renewable Energy</option>
+      <option value="Solar Power">Solar Power</option>
+      <option value="Wind Energy">Wind Energy</option>
+    </>
+  )}
+  {industry === "Fashion and Apparel" && (
+    <>
+      <option value="Accessories">Accessories</option>
+      <option value="Footwear">Footwear</option>
+      <option value="Garments">Garments</option>
+      <option value="Jewelry">Jewelry</option>
+      <option value="Textiles">Textiles</option>
+    </>
+  )}
+  {industry === "Food and Beverages" && (
+    <>
+      <option value="Bakeries">Bakeries</option>
+      <option value="Beverages">Beverages</option>
+      <option value="Confectionery">Confectionery</option>
+      <option value="Dairy Products">Dairy Products</option>
+      <option value="Frozen Foods">Frozen Foods</option>
+      <option value="Organic Foods">Organic Foods</option>
+      <option value="Packaged Foods">Packaged Foods</option>
+    </>
+  )}
+  {industry === "Healthcare and Pharmaceuticals" && (
+    <>
+      <option value="Ayurveda">Ayurveda</option>
+      <option value="Diagnostic Labs">Diagnostic Labs</option>
+      <option value="Hospitals">Hospitals</option>
+      <option value="Medical Devices">Medical Devices</option>
+      <option value="Nutraceuticals">Nutraceuticals</option>
+      <option value="Pharmaceuticals">Pharmaceuticals</option>
+    </>
+  )}
+  {industry === "Information Technology" && (
+    <>
+      <option value="Artificial Intelligence">Artificial Intelligence</option>
+      <option value="Cybersecurity">Cybersecurity</option>
+      <option value="IT Services">IT Services</option>
+      <option value="Software Development">Software Development</option>
+      <option value="Web Development">Web Development</option>
+    </>
+  )}
+  {industry === "Manufacturing" && (
+    <>
+      <option value="Automobile Manufacturing">Automobile Manufacturing</option>
+      <option value="Chemical Manufacturing">Chemical Manufacturing</option>
+      <option value="Food Processing">Food Processing</option>
+      <option value="Metal and Steel">Metal and Steel</option>
+      <option value="Textile Manufacturing">Textile Manufacturing</option>
+    </>
+  )}
+  {industry === "Mining and Metals" && (
+    <>
+      <option value="Coal Mining">Coal Mining</option>
+      <option value="Gold Mining">Gold Mining</option>
+      <option value="Iron and Steel">Iron and Steel</option>
+      <option value="Metal Extraction">Metal Extraction</option>
+    </>
+  )}
+  {industry === "Real Estate" && (
+    <>
+      <option value="Commercial Properties">Commercial Properties</option>
+      <option value="Residential Properties">Residential Properties</option>
+      <option value="Property Management">Property Management</option>
+    </>
+  )}
+
+  {industry === "Telecommunication" && (
+    <>
+      <option value="Broadband Services">Broadband Services</option>
+      <option value="Satellite Communications">Satellite Communications</option>
+      <option value="Cell Phones">Cell Phones</option>
+      <option value="Data Cards">Data Cards</option>
+      <option value="Internet Services">Internet Services</option>
+      <option value="Mobile Accessories">Mobile Accessories</option>
+      <option value="Telecommunication Equipment">Telecommunication Equipment</option>
+
+    </>
+  )}
+  {industry === "Transport and Logistics" && (
+    <>
+      <option value="Air Transport">Air Transport</option>
+      <option value="Rail Transport">Rail Transport</option>
+      <option value="Road Transport">Road Transport</option>
+      <option value="Shipping and Ports">Shipping and Ports</option>
+      <option value="Warehousing">Warehousing</option>
+    </>
+  )}
+
+{industry === "Business Services" && (
+  <>
+    <option value="Accounting and Auditing">Accounting and Auditing</option>
+    <option value="Advertising and Marketing">Advertising and Marketing</option>
+    <option value="Business Consulting">Business Consulting</option>
+    <option value="Event Management">Event Management</option>
+    <option value="Human Resources">Human Resources</option>
+    <option value="IT Services">IT Services</option>
+    <option value="Logistics and Supply Chain">Logistics and Supply Chain</option>
+    <option value="Recruitment and Training">Recruitment and Training</option>
+  </>
+)}
+
+{industry === "Computer Hardware, Mobile & Accessories" && (
+  <>
+    <option value="Computer Hardware">Computer Hardware</option>
+    <option value="Gaming Consoles">Gaming Consoles</option>
+    <option value="Mobile Accessories">Mobile Accessories</option>
+    <option value="Mobile Phones">Mobile Phones</option>
+    <option value="Networking Equipment">Networking Equipment</option>
+    <option value="Printers and Scanners">Printers and Scanners</option>
+    <option value="Software">Software</option>
+    <option value="Tablets and Laptops">Tablets and Laptops</option>
+  </>
+)}
+
+{industry === "Electronics & Electrical Supplies" && (
+  <>
+    <option value="Audio and Video Equipment">Audio and Video Equipment</option>
+    <option value="Cables and Wires">Cables and Wires</option>
+    <option value="Electrical Components">Electrical Components</option>
+    <option value="Electronic Components">Electronic Components</option>
+    <option value="Home Appliances">Home Appliances</option>
+    <option value="Industrial Automation">Industrial Automation</option>
+    <option value="Lighting">Lighting</option>
+    <option value="Power Supplies">Power Supplies</option>
+  </>
+)}
+
+{industry === "Environment & Pollution" && (
+  <>
+    <option value="Air Pollution Control">Air Pollution Control</option>
+    <option value="Environmental Consulting">Environmental Consulting</option>
+    <option value="Green Building Materials">Green Building Materials</option>
+    <option value="Hazardous Waste Management">Hazardous Waste Management</option>
+    <option value="Renewable Energy">Renewable Energy</option>
+    <option value="Soil Remediation">Soil Remediation</option>
+    <option value="Solid Waste Management">Solid Waste Management</option>
+    <option value="Water Treatment">Water Treatment</option>
+  </>
+)}
+
+{industry === "Fashion & Apparel" && (
+  <>
+    <option value="Accessories">Accessories</option>
+    <option value="Bridal Wear">Bridal Wear</option>
+    <option value="Casual Wear">Casual Wear</option>
+    <option value="Children's Wear">Children's Wear</option>
+    <option value="Ethnic Wear">Ethnic Wear</option>
+    <option value="Footwear">Footwear</option>
+    <option value="Formal Wear">Formal Wear</option>
+    <option value="Luxury Wear">Luxury Wear</option>
+  </>
+)}
+
+{industry === "Furniture" && (
+  <>
+    <option value="Bedroom Furniture">Bedroom Furniture</option>
+    <option value="Dining Furniture">Dining Furniture</option>
+    <option value="Garden Furniture">Garden Furniture</option>
+    <option value="Home Decor">Home Decor</option>
+    <option value="Kitchen Furniture">Kitchen Furniture</option>
+    <option value="Living Room Furniture">Living Room Furniture</option>
+    <option value="Office Furniture">Office Furniture</option>
+    <option value="Outdoor Furniture">Outdoor Furniture</option>
+  </>
+)}
+
+{industry === "Health & Beauty" && (
+  <>
+    <option value="Ayurvedic Products">Ayurvedic Products</option>
+    <option value="Cosmetics">Cosmetics</option>
+    <option value="Fitness Equipment">Fitness Equipment</option>
+    <option value="Fragrances">Fragrances</option>
+    <option value="Hair Care">Hair Care</option>
+    <option value="Health Supplements">Health Supplements</option>
+    <option value="Personal Care">Personal Care</option>
+    <option value="Skincare">Skincare</option>
+  </>
+)}
+
+{industry === "Home Supplies" && (
+  <>
+    <option value="Cleaning Supplies">Cleaning Supplies</option>
+    <option value="Cookware">Cookware</option>
+    <option value="Crockery">Crockery</option>
+    <option value="Cutlery">Cutlery</option>
+    <option value="Glassware">Glassware</option>
+    <option value="Home Appliances">Home Appliances</option>
+    <option value="Kitchen Utensils">Kitchen Utensils</option>
+    <option value="Linen">Linen</option>
+  </>
+)}
+
+{industry === "Hotel supplies & Equipments" && (
+  <>
+    <option value="Bedding and Towels">Bedding and Towels</option>
+    <option value="Catering Equipment">Catering Equipment</option>
+    <option value="Cleaning Supplies">Cleaning Supplies</option>
+    <option value="Furniture">Furniture</option>
+    <option value="Hotel Amenities">Hotel Amenities</option>
+    <option value="Hotel Linen">Hotel Linen</option>
+    <option value="Kitchen Equipment">Kitchen Equipment</option>
+    <option value="Laundry Equipment">Laundry Equipment</option>
+  </>
+)}
+
+{industry === "Industry Supplies" && (
+  <>
+    <option value="Abrasives">Abrasives</option>
+    <option value="Adhesives">Adhesives</option>
+    <option value="Bearings">Bearings</option>
+    <option value="Cutting Tools">Cutting Tools</option>
+    <option value="Electrical Supplies">Electrical Supplies</option>
+    <option value="Fasteners">Fasteners</option>
+    <option value="Hand Tools">Hand Tools</option>
+    <option value="Lubricants">Lubricants</option>
+  </>
+)}
+
+{industry === "Jewellery, Gemstones & Astrology" && (
+  <>
+    <option value="Astrology Services">Astrology Services</option>
+    <option value="Diamond Jewellery">Diamond Jewellery</option>
+    <option value="Gemstones">Gemstones</option>
+    <option value="Gold Jewellery">Gold Jewellery</option>
+    <option value="Jewellery Boxes">Jewellery Boxes</option>
+    <option value="Precious Stones">Precious Stones</option>
+    <option value="Silver Jewellery">Silver Jewellery</option>
+    <option value="Watches">Watches</option>
+  </>
+)}
+
+{industry === "Food & Beverages" && (
+  <>
+    <option value="Bakery Products">Bakery Products</option>
+    <option value="Beverages">Beverages</option>
+    <option value="Confectionery">Confectionery</option>
+    <option value="Dairy Products">Dairy Products</option>
+    <option value="Fruits and Vegetables">Fruits and Vegetables</option>
+    <option value="Meat and Poultry">Meat and Poultry</option>
+    <option value="Processed Foods">Processed Foods</option>
+    <option value="Snacks and Namkeens">Snacks and Namkeens</option>
+  </>
+)}
+
+{industry === "Business Services" && (
+  <>
+    <option value="Accounting and Auditing">Accounting and Auditing</option>
+    <option value="Advertising and Marketing">Advertising and Marketing</option>
+    <option value="Business Consulting">Business Consulting</option>
+    <option value="Event Management">Event Management</option>
+    <option value="Human Resources">Human Resources</option>
+    <option value="IT Services">IT Services</option>
+    <option value="Logistics and Supply Chain">Logistics and Supply Chain</option>
+    <option value="Recruitment and Training">Recruitment and Training</option>
+  </>
+)}
+
+{industry === "Computer Hardware, Mobile & Accessories" && (
+  <>
+    <option value="Computer Hardware">Computer Hardware</option>
+    <option value="Gaming Consoles">Gaming Consoles</option>
+    <option value="Mobile Accessories">Mobile Accessories</option>
+    <option value="Mobile Phones">Mobile Phones</option>
+    <option value="Networking Equipment">Networking Equipment</option>
+    <option value="Printers and Scanners">Printers and Scanners</option>
+    <option value="Software">Software</option>
+    <option value="Tablets and Laptops">Tablets and Laptops</option>
+  </>
+)}
+
+{industry === "Electronics & Electrical Supplies" && (
+  <>
+    <option value="Audio and Video Equipment">Audio and Video Equipment</option>
+    <option value="Cables and Wires">Cables and Wires</option>
+    <option value="Electrical Components">Electrical Components</option>
+    <option value="Electronic Components">Electronic Components</option>
+    <option value="Home Appliances">Home Appliances</option>
+    <option value="Industrial Automation">Industrial Automation</option>
+    <option value="Lighting">Lighting</option>
+    <option value="Power Supplies">Power Supplies</option>
+  </>
+)}
+
+{industry === "Environment & Pollution" && (
+  <>
+    <option value="Air Pollution Control">Air Pollution Control</option>
+    <option value="Environmental Consulting">Environmental Consulting</option>
+    <option value="Green Building Materials">Green Building Materials</option>
+    <option value="Hazardous Waste Management">Hazardous Waste Management</option>
+    <option value="Renewable Energy">Renewable Energy</option>
+    <option value="Soil Remediation">Soil Remediation</option>
+    <option value="Solid Waste Management">Solid Waste Management</option>
+    <option value="Water Treatment">Water Treatment</option>
+  </>
+)}
+
+{industry === "Fashion & Apparel" && (
+  <>
+    <option value="Accessories">Accessories</option>
+    <option value="Bridal Wear">Bridal Wear</option>
+    <option value="Casual Wear">Casual Wear</option>
+    <option value="Children's Wear">Children's Wear</option>
+    <option value="Ethnic Wear">Ethnic Wear</option>
+    <option value="Footwear">Footwear</option>
+    <option value="Formal Wear">Formal Wear</option>
+    <option value="Luxury Wear">Luxury Wear</option>
+  </>
+)}
+
+{industry === "Furniture" && (
+  <>
+    <option value="Bedroom Furniture">Bedroom Furniture</option>
+    <option value="Dining Furniture">Dining Furniture</option>
+    <option value="Garden Furniture">Garden Furniture</option>
+    <option value="Home Decor">Home Decor</option>
+    <option value="Kitchen Furniture">Kitchen Furniture</option>
+    <option value="Living Room Furniture">Living Room Furniture</option>
+    <option value="Office Furniture">Office Furniture</option>
+    <option value="Outdoor Furniture">Outdoor Furniture</option>
+  </>
+)}
+
+{industry === "Health & Beauty" && (
+  <>
+    <option value="Ayurvedic Products">Ayurvedic Products</option>
+    <option value="Cosmetics">Cosmetics</option>
+    <option value="Fitness Equipment">Fitness Equipment</option>
+    <option value="Fragrances">Fragrances</option>
+    <option value="Hair Care">Hair Care</option>
+    <option value="Health Supplements">Health Supplements</option>
+    <option value="Personal Care">Personal Care</option>
+    <option value="Skincare">Skincare</option>
+  </>
+)}
+
+{industry === "Hotel Supplies & Equipments" && (
+  <>
+    <option value="Bedding and Towels">Bedding and Towels</option>
+    <option value="Catering Equipment">Catering Equipment</option>
+    <option value="Cleaning Supplies">Cleaning Supplies</option>
+    <option value="Furniture">Furniture</option>
+    <option value="Hotel Amenities">Hotel Amenities</option>
+    <option value="Hotel Linen">Hotel Linen</option>
+    <option value="Kitchen Equipment">Kitchen Equipment</option>
+    <option value="Laundry Equipment">Laundry Equipment</option>
+  </>
+)}
+
+
+{industry === "Business Services" && (
+  <>
+    <option value="Accounting and Auditing">Accounting and Auditing</option>
+    <option value="Advertising and Marketing">Advertising and Marketing</option>
+    <option value="Business Consulting">Business Consulting</option>
+    <option value="Event Management">Event Management</option>
+    <option value="Human Resources">Human Resources</option>
+    <option value="IT Services">IT Services</option>
+    <option value="Logistics and Supply Chain">Logistics and Supply Chain</option>
+    <option value="Recruitment and Training">Recruitment and Training</option>
+  </>
+)}
+
+{industry === "Computer Hardware, Mobile & Accessories" && (
+  <>
+    <option value="Computer Hardware">Computer Hardware</option>
+    <option value="Gaming Consoles">Gaming Consoles</option>
+    <option value="Mobile Accessories">Mobile Accessories</option>
+    <option value="Mobile Phones">Mobile Phones</option>
+    <option value="Networking Equipment">Networking Equipment</option>
+    <option value="Printers and Scanners">Printers and Scanners</option>
+    <option value="Software">Software</option>
+    <option value="Tablets and Laptops">Tablets and Laptops</option>
+  </>
+)}
+
+{industry === "Electronics & Electrical Supplies" && (
+  <>
+    <option value="Audio and Video Equipment">Audio and Video Equipment</option>
+    <option value="Cables and Wires">Cables and Wires</option>
+    <option value="Electrical Components">Electrical Components</option>
+    <option value="Electronic Components">Electronic Components</option>
+    <option value="Home Appliances">Home Appliances</option>
+    <option value="Industrial Automation">Industrial Automation</option>
+    <option value="Lighting">Lighting</option>
+    <option value="Power Supplies">Power Supplies</option>
+  </>
+)}
+
+{industry === "Environment & Pollution" && (
+  <>
+    <option value="Air Pollution Control">Air Pollution Control</option>
+    <option value="Environmental Consulting">Environmental Consulting</option>
+    <option value="Green Building Materials">Green Building Materials</option>
+    <option value="Hazardous Waste Management">Hazardous Waste Management</option>
+    <option value="Renewable Energy">Renewable Energy</option>
+    <option value="Soil Remediation">Soil Remediation</option>
+    <option value="Solid Waste Management">Solid Waste Management</option>
+    <option value="Water Treatment">Water Treatment</option>
+  </>
+)}
+
+{industry === "Fashion & Apparel" && (
+  <>
+    <option value="Accessories">Accessories</option>
+    <option value="Bridal Wear">Bridal Wear</option>
+    <option value="Casual Wear">Casual Wear</option>
+    <option value="Children's Wear">Children's Wear</option>
+    <option value="Ethnic Wear">Ethnic Wear</option>
+    <option value="Footwear">Footwear</option>
+    <option value="Formal Wear">Formal Wear</option>
+    <option value="Luxury Wear">Luxury Wear</option>
+  </>
+)}
+
+{industry === "Hotel Supplies & Equipments" && (
+  <>
+    <option value="Bedding and Towels">Bedding and Towels</option>
+    <option value="Catering Equipment">Catering Equipment</option>
+    <option value="Cleaning Supplies">Cleaning Supplies</option>
+    <option value="Furniture">Furniture</option>
+    <option value="Hotel Amenities">Hotel Amenities</option>
+    <option value="Hotel Linen">Hotel Linen</option>
+    <option value="Kitchen Equipment">Kitchen Equipment</option>
+    <option value="Laundry Equipment">Laundry Equipment</option>
+  </>
+)}
+
+{industry === "Medical & Hospital" && (
+  <>
+    <option value="Dental Equipment">Dental Equipment</option>
+    <option value="Diagnostic Equipment">Diagnostic Equipment</option>
+    <option value="Hospital Furniture">Hospital Furniture</option>
+    <option value="Medical Consumables">Medical Consumables</option>
+    <option value="Medical Instruments">Medical Instruments</option>
+    <option value="Orthopedic Equipment">Orthopedic Equipment</option>
+    <option value="Patient Monitoring Systems">Patient Monitoring Systems</option>
+    <option value="Surgical Equipment">Surgical Equipment</option>
+  </>
+)}
+
+{industry === "Pharmaceuticals" && (
+  <>
+    <option value="Active Pharmaceutical Ingredients (APIs)">Active Pharmaceutical Ingredients (APIs)</option>
+    <option value="Ayurvedic Medicines">Ayurvedic Medicines</option>
+    <option value="Contract Manufacturing">Contract Manufacturing</option>
+    <option value="Generic Medicines">Generic Medicines</option>
+    <option value="Herbal Medicines">Herbal Medicines</option>
+    <option value="Homeopathic Medicines">Homeopathic Medicines</option>
+    <option value="Nutraceuticals">Nutraceuticals</option>
+    <option value="Prescription Medicines">Prescription Medicines</option>
+  </>
+)}
+
+{industry === "Security & Protection" && (
+  <>
+    <option value="Access Control Systems">Access Control Systems</option>
+    <option value="Alarm Systems">Alarm Systems</option>
+    <option value="Biometric Systems">Biometric Systems</option>
+    <option value="CCTV Cameras">CCTV Cameras</option>
+    <option value="Fire Safety Equipment">Fire Safety Equipment</option>
+    <option value="Home Security Systems">Home Security Systems</option>
+    <option value="Intrusion Detection Systems">Intrusion Detection Systems</option>
+    <option value="Surveillance Systems">Surveillance Systems</option>
+  </>
+)}
+
+{industry === "Toys & Games" && (
+  <>
+    <option value="Action Figures">Action Figures</option>
+    <option value="Board Games">Board Games</option>
+    <option value="Dolls and Accessories">Dolls and Accessories</option>
+    <option value="Educational Toys">Educational Toys</option>
+    <option value="Electronic Toys">Electronic Toys</option>
+    <option value="Games and Puzzles">Games and Puzzles</option>
+    <option value="Outdoor Toys">Outdoor Toys</option>
+    <option value="Soft Toys">Soft Toys</option>
+  </>
+)}
+{industry === "Office & School" && (
+  <>
+    <option value="Art Supplies">Art Supplies</option>
+    <option value="Educational Materials">Educational Materials</option>
+    <option value="Ergonomic Furniture">Ergonomic Furniture</option>
+    <option value="Office Equipment">Office Equipment</option>
+    <option value="Office Furniture">Office Furniture</option>
+    <option value="Paper Products">Paper Products</option>
+    <option value="School Furniture">School Furniture</option>
+    <option value="Stationery">Stationery</option>
+  </>
+)}
+
+{industry === "Packaging, Paper & Plastic Products" && (
+  <>
+    <option value="Bottles and Containers">Bottles and Containers</option>
+    <option value="Corrugated Boxes">Corrugated Boxes</option>
+    <option value="Flexible Packaging">Flexible Packaging</option>
+    <option value="Glass Packaging">Glass Packaging</option>
+    <option value="Labeling and Coding">Labeling and Coding</option>
+    <option value="Paper Bags">Paper Bags</option>
+    <option value="Plastic Packaging">Plastic Packaging</option>
+    <option value="Rigid Packaging">Rigid Packaging</option>
+  </>
+)}
+
+{industry === "Printing & Publishing" && (
+  <>
+    <option value="Book Printing">Book Printing</option>
+    <option value="Brochure Printing">Brochure Printing</option>
+    <option value="Business Cards">Business Cards</option>
+    <option value="Digital Printing">Digital Printing</option>
+    <option value="Flex Printing">Flex Printing</option>
+    <option value="Label Printing">Label Printing</option>
+    <option value="Magazine Printing">Magazine Printing</option>
+    <option value="Newspaper Printing">Newspaper Printing</option>
+  </>
+)}
+
+{industry === "Retail & E-Retail" && (
+  <>
+    <option value="E-commerce Platforms">E-commerce Platforms</option>
+    <option value="Fashion Retail">Fashion Retail</option>
+    <option value="Food Retail">Food Retail</option>
+    <option value="Home Decor Retail">Home Decor Retail</option>
+    <option value="Online Marketplaces">Online Marketplaces</option>
+    <option value="Retail Software">Retail Software</option>
+    <option value="Supermarkets">Supermarkets</option>
+    <option value="Wholesale Markets">Wholesale Markets</option>
+  </>
+)}
+
+{industry === "Scientific & Laboratory" && (
+  <>
+    <option value="Analytical Instruments">Analytical Instruments</option>
+    <option value="Biotechnology Equipment">Biotechnology Equipment</option>
+    <option value="Chemicals and Reagents">Chemicals and Reagents</option>
+    <option value="Laboratory Furniture">Laboratory Furniture</option>
+    <option value="Laboratory Instruments">Laboratory Instruments</option>
+    <option value="Medical Laboratory Equipment">Medical Laboratory Equipment</option>
+    <option value="Microscopes">Microscopes</option>
+    <option value="Scientific Software">Scientific Software</option>
+  </>
+)}
+
+{industry === "Sports, Fitness & Entertainment" && (
+  <>
+    <option value="Fitness Equipment">Fitness Equipment</option>
+    <option value="Game Tables">Game Tables</option>
+    <option value="Gym Equipment">Gym Equipment</option>
+    <option value="Musical Instruments">Musical Instruments</option>
+    <option value="Outdoor Games">Outdoor Games</option>
+    <option value="Playground Equipment">Playground Equipment</option>
+    <option value="Sports Equipment">Sports Equipment</option>
+    <option value="Yoga and Meditation Equipment">Yoga and Meditation Equipment</option>
+  </>
+)}
+
+{industry === "Textile, Fabrics & Accessories" && (
+  <>
+    <option value="Apparel Fabrics">Apparel Fabrics</option>
+    <option value="Cotton Fabrics">Cotton Fabrics</option>
+    <option value="Embroidery Services">Embroidery Services</option>
+    <option value="Fabric Dyeing">Fabric Dyeing</option>
+    <option value="Fabric Printing">Fabric Printing</option>
+    <option value="Fashion Accessories">Fashion Accessories</option>
+    <option value="Knitted Fabrics">Knitted Fabrics</option>
+    <option value="Woven Fabrics">Woven Fabrics</option>
+  </>
+)}
+
+
+
+
+
           </select>
 
           <label className="sellerform-label">Space</label>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import "./buyerpage.css"; // Import your CSS file
 import Nav2 from "../Nav2/Nav2";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Search from "../Search/Search";
 import UserCard from "../UserCard";
 
@@ -10,12 +10,42 @@ const url = process.env.REACT_APP_API_URL;
 
 const Buyerpage = () => {
   const [buyerdata, setBuyerData] = useState([]);
-  const [activeBuyerId, setActiveBuyerId] = useState(null); // State to track which buyer's "More" section is open
+
   const [searchparams] = useSearchParams();
   const [err, setErr] = useState(null); // To store error messages
   const [loading, setLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
-  const navigate = useNavigate();
+  // Fetch user data
+  const getUserData = () => {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      setIsLogged(false);
+      setLoading(false); // Stop loading when no token is found
+    } else {
+      setIsLogged(true);
+
+      axios
+        .get(`${url}auth/data`, {
+          headers: {
+            Authorization: `${token}`, // Add the token to the Authorization header
+          },
+        })
+        .then((res) => {
+          setLoading(false); // Data fetched, stop loading
+          console.log("User data:", res.data);
+        })
+        .catch((err) => {
+          console.log("Error fetching user data: " + err.message);
+          setLoading(false); // Stop loading even on error
+          if (err.response && err.response.status === 401) {
+            // If token is invalid or expired, handle accordingly
+            localStorage.removeItem("token"); // Clear invalid token
+          }
+        });
+    }
+  };
 
   const getbuyerdata = () => {
     axios
@@ -38,12 +68,8 @@ const Buyerpage = () => {
 
   useEffect(() => {
     getbuyerdata();
+    getUserData();
   }, [searchparams]);
-
-  const toggleBtnMore = (buyerId) => {
-    // Toggle the activeBuyerId; if the same ID is clicked again, close it
-    setActiveBuyerId(activeBuyerId === buyerId ? null : buyerId);
-  };
 
   if (loading) {
     return <div className="loader"></div>; // Show loading indicator while data is being fetched
@@ -53,87 +79,32 @@ const Buyerpage = () => {
     <Fragment>
       <Nav2 />
 
-      <h1 className="buyer-title">Business Seeker</h1>
-      <Search />
+      <div className="relative w-full p-4">
+        <button
+          className="absolute top-20 right-4 sm:right-6 md:right-10 lg:right-14 
+              bg-yellow-400 text-blue-900 font-semibold py-2 px-4 
+               rounded-lg shadow-md 
+              hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
+        >
+          <Link
+            to={isLogged ? "/form/buyer" : "/login"}
+            style={{ color: "#03045e", textDecoration: "none" }}
+          >
+            Register
+          </Link>
+        </button>
+      </div>
 
+      <Search />
+      <h1 className="buyer-title text-xl sm:text-lg md:text-2xl lg:text-3xl">
+        Business Seeker
+      </h1>
       {err ? (
         <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
           <h2>{err}</h2>
         </div>
       ) : (
-       
-          <UserCard data={buyerdata} />
-      
-
-        // <div className="buyer-container">
-
-        //    {buyerdata.map((data) => (
-        //     <div className="buyer-card" key={data._id}>
-        //       <table className="details-tables">
-        //         <tbody>
-        //           <tr>
-        //             <th>Title</th>
-        //             <td>{data.title}</td>
-        //           </tr>
-
-        //           <tr>
-        //             <th>Industry</th>
-        //             <td>{data.industry}</td>
-        //           </tr>
-
-        //           <tr>
-        //             <th>Category</th>
-        //             <td>{data.category}</td>
-        //           </tr>
-        //           <tr>
-        //             <th>Role Looking for</th>
-        //             <td>
-        //               {(() => {
-        //                 const roles = [];
-
-        //                 if (data.role.dealer) roles.push("Dealer");
-        //                 if (data.role.franchise) roles.push("Franchise");
-        //                 if (data.role.wholesaler) roles.push("Wholesaler");
-        //                 if (data.role.stockist) roles.push("Stockist");
-        //                 if (data.role.distributor) roles.push("Distributor");
-        //                 if (data.role.agency) roles.push("Agency");
-        //                 if (data.role.retailer) roles.push("Retailer");
-        //                 if (data.role.BusinessBuyOuts)
-        //                   roles.push("  Business Buy Outs");
-        //                 if (data.role.InvestPartners)
-        //                   roles.push("InvestPartners");
-        //                 if (data.role.SharePartners)
-        //                   roles.push("SharePartners");
-        //                 if (data.role.WorkingPartners)
-        //                   roles.push("WorkingPartners");
-        //                 if (data.role.ShareBuyers) roles.push("Share Buyers");
-        //                 if (data.role.SeedFunders) roles.push("Seed Funders ");
-        //                 if (data.role.VentureCapitals)
-        //                   roles.push("Venture Capitals");
-
-        //                 return roles.length > 0
-        //                   ? roles.join(", ")
-        //                   : "No Roles Selected";
-        //               })()}
-        //             </td>
-        //           </tr>
-        //           <tr>
-        //             <th>Investment</th>
-        //             <td>{data.investmentrange.min}</td>
-        //           </tr>
-        //         </tbody>
-        //       </table>
-
-        //       <button
-        //         className={activeBuyerId === data._id ? "morehide" : "more"}
-        //         onClick={() => toggleBtnMore(data._id)}
-        //       >
-        //         More
-        //       </button>
-
-        //     </div>
-        //   ))}
-        // </div>
+        <UserCard data={buyerdata} />
       )}
     </Fragment>
   );

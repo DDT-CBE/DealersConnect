@@ -81,6 +81,13 @@ const SellerCard = ({ sellers }) => {
 
                   <div>
                     <label className="block text-gray-700 font-medium">
+                      Type
+                    </label>
+                    <p className="text-gray-600">{data.seekerType}</p>
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-medium">
                       Investment Range
                     </label>
                     <p className="text-gray-600">

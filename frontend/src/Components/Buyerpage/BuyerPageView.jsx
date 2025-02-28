@@ -75,6 +75,9 @@ const BuyerPageView = () => {
               <p className="text-lg font-medium text-gray-700">
                 <strong>Category:</strong> {buyerData.category}
               </p>
+              <p className="text-lg font-medium text-gray-700">
+                <strong>Type:</strong> {buyerData.businessType}
+              </p>
             </div>
             <div>
               <p className="text-lg font-medium text-gray-700">

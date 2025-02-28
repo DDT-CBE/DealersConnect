@@ -60,6 +60,12 @@ const UserCard = ({ data }) => {
                     </label>
                     <p className="text-gray-600">{user.category}</p>
                   </div>
+                  <div>
+                    <label className="block text-gray-700 font-medium">
+                      Type
+                    </label>
+                    <p className="text-gray-600">{user.businessType}</p>
+                  </div>
 
                   <div>
                     <label className="block text-gray-700 font-medium">
