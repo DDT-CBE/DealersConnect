@@ -76,7 +76,29 @@ const Nav2 = () => {
           alt="menu"
           onClick={menutoggle}
         />
-        <h1>Dealers Connect</h1>
+        {isBuyerPage || isBuyerFormPage ? (
+                <Link
+                  to={isLogged ? "/form/buyer" : "/login"}
+                  style={{ color: "#03045e", textDecoration: "none" }}
+                  className="absolute  right-4 sm:right-6 md:right-10 lg:right-14 
+                  text-blue-900 font-semibold py-2 px-4 
+                   rounded-lg shadow-md 
+                  hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
+                >
+                  Register
+                </Link>
+              ) : isSellerPage || isSellerFormPage ? (
+                <Link
+                  to={isLogged ? "/form/seller" : "/login"}
+                  style={{ color: "#03045e", textDecoration: "none" }}
+                  className="absolute  right-4 sm:right-6 md:right-10 lg:right-14 
+                  text-blue-900 font-semibold py-2 px-4 
+                   rounded-lg shadow-md 
+                  hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
+                >
+                  Register
+                </Link>
+              ) : null}
 
         {!isDashboard && (
           <ul className={menu ? "reset" : "navcontent"}>
@@ -91,33 +113,16 @@ const Nav2 = () => {
               </Link>
             </li>
             <li>
-              <Link
+              {/* <Link
                 to="/dashboard"
                 style={{ color: "#03045e", textDecoration: "none" }}
-              >
+              > */}
                 Dashboard
-              </Link>
+              {/* </Link> */}
             </li>
 
-            {/* Conditionally render the form link based on the page */}
 
-            <li>
-              {isBuyerPage || isBuyerFormPage ? (
-                <Link
-                  to={isLogged ? "/form/buyer" : "/login"}
-                  style={{ color: "#03045e", textDecoration: "none" }}
-                >
-                  Register
-                </Link>
-              ) : isSellerPage || isSellerFormPage ? (
-                <Link
-                  to={isLogged ? "/form/seller" : "/login"}
-                  style={{ color: "#03045e", textDecoration: "none" }}
-                >
-                  Register
-                </Link>
-              ) : null}
-            </li>
+           
           </ul>
         )}
       </nav>

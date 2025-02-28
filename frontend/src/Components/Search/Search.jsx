@@ -20,7 +20,9 @@ const Search = () => {
 
   return (
     <Fragment>
+      <h3 className="search-title">Find Your Match</h3>
       <form className='search' onSubmit={searchController} role="search">
+     
 
         <input
 

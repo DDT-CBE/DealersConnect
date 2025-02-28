@@ -10,7 +10,6 @@ const url = process.env.REACT_APP_API_URL;
 
 const Sellerpage = () => {
   const [sellerdata, setSellerData] = useState([]);
-  const [activeSellerId, setActiveSellerId] = useState(null); // Track which seller's "More" section is open
   const [loading, setLoading] = useState(true);
   const [searchparams] = useSearchParams();
   const [err, setErr] = useState(null); // To store error messages
@@ -47,7 +46,7 @@ const Sellerpage = () => {
     }
   };
 
-  const navigate = useNavigate();
+  
 
   const getsellerdata = () => {
     axios
@@ -73,9 +72,7 @@ const Sellerpage = () => {
     getUserData();
   }, [searchparams]);
 
-  const toggleBtnMore = (id) => {
-    setActiveSellerId(activeSellerId === id ? null : id);
-  };
+ 
 
   if (loading) {
     return <div className="loader"></div>; // Show loading indicator while data is being fetched
@@ -85,27 +82,12 @@ const Sellerpage = () => {
     <Fragment>
       <Nav2 />
 
-     <div className="relative w-full p-4">
-             <button
-               className="absolute top-20 right-4 sm:right-6 md:right-10 lg:right-14 
-                   bg-yellow-400 text-blue-900 font-semibold py-2 px-4 
-                    rounded-lg shadow-md 
-                   hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
-             >
-               <Link
-                 to={isLogged ? "/form/seller" : "/login"}
-                 style={{ color: "#03045e", textDecoration: "none" }}
-               >
-                 Register
-               </Link>
-             </button>
-           </div>
-
+    
 
     
 
       <Search />
-      <h1 className="buyer-title">Business Provider</h1>
+      {/* <h1 className="buyer-title">Business Provider</h1> */}
       {err ? (
         <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
           <h2>{err}</h2>

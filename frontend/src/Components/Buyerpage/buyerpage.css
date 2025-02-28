@@ -1,13 +1,4 @@
-/* General styles */
-.buyer-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-top: 30px;
-  color: #34495e;
-  font-weight: bold;
-  padding: 60px 0 10px;
-  border-bottom: 2px solid #ddd;
-}
+
 
 .buyer-container {
   display: flex;
@@ -18,103 +9,7 @@
   padding: 20px;
 }
 
-/* Buyer card styles */
-.buyer-card {
-  background-color: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  width: 500px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin-bottom: 20px;
-}
 
-.buyer-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Details table styles */
-.details-table,
-.details-tables {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.details-table th,
-.details-table td,
-.details-tables th,
-.details-tables td {
-  padding: 12px 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-  width: 50%;
-}
-
-.details-table th,
-.details-tables th {
-  font-weight: bold;
-  color: #34495e;
-}
-
-.details-table td {
-  background-color: #fafafa;
-}
-
-.details-tables tr:nth-child(1) {
-  background-color: #ffdd00;
-}
-
-/* More button styles */
-.more {
-  background: linear-gradient(to right, #ffa200, #ffdd00);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.morehide {
-  display: none;
-}
-
-/* Search input styles */
-.search {
-  margin-top: 100px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.search input {
-  width: 300px;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: #ffea00be;
-  color: black;
-  border: none;
-}
-
-.search button {
-  padding: 10px 20px;
-  background-color: #ffa200;
-  border: none;
-  border-radius: 20px;
-}
-
-.search button:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
 
 /* Loader styles */
 .loader {
@@ -126,6 +21,91 @@
   background-color: #ffca03;
 }
 
+
+
+/* Search input styles */
+.search {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr)); /* 2-column layout */
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+/* Input field styles */
+.search input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: #ffea00be;
+  color: black;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  
+}
+
+/* Button styles */
+.search button {
+  grid-column: span 2; /* Button takes full width */
+  padding: 12px;
+  background-color: #ffa200;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effects */
+.search button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.search-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  margin-top: 85px;
+  position: relative;
+  letter-spacing: 1px;
+ 
+}
+
+/* Underline Effect */
+.search-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #ffa200;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .search-title {
+    font-size: 20px;
+  }
+}
+
+
+
+
 /* Media queries for responsive design */
 @media (max-width: 1200px), (max-width: 768px), (max-width: 488px) {
   .buyer-card {
@@ -133,3 +113,5 @@
     max-width: 100%;
   }
 }
+
+

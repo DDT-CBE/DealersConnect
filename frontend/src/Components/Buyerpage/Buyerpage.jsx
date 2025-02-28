@@ -79,26 +79,28 @@ const Buyerpage = () => {
     <Fragment>
       <Nav2 />
 
-      <div className="relative w-full p-4">
-        <button
-          className="absolute top-20 right-4 sm:right-6 md:right-10 lg:right-14 
-              bg-yellow-400 text-blue-900 font-semibold py-2 px-4 
-               rounded-lg shadow-md 
-              hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
-        >
-          <Link
-            to={isLogged ? "/form/buyer" : "/login"}
-            style={{ color: "#03045e", textDecoration: "none" }}
+      {/* <div className="relative w-full p-4">
+          <button
+            className="absolute top-20 right-4 sm:right-6 md:right-10 lg:right-14 
+                bg-yellow-400 text-blue-900 font-semibold py-2 px-4 
+                rounded-lg shadow-md 
+                hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
           >
-            Register
-          </Link>
-        </button>
-      </div>
+            <Link
+              to={isLogged ? "/form/buyer" : "/login"}
+              style={{ color: "#03045e", textDecoration: "none" }}
+            >
+              Register
+            </Link>
+          </button>
+        </div> */}
 
       <Search />
-      <h1 className="buyer-title text-xl sm:text-lg md:text-2xl lg:text-3xl">
+      {/* <h1 className="text-xl sm:text-sm md:text-4xl lg:text-5xl font-bold text-center text-gray-800 relative uppercase tracking-wide">
         Business Seeker
-      </h1>
+        <span className="block w-24 h-1 bg-yellow-500 mx-auto mt-2 rounded"></span>
+      </h1> */}
+
       {err ? (
         <div style={{ textAlign: "center", color: "red", marginTop: "20px" }}>
           <h2>{err}</h2>
